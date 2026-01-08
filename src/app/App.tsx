@@ -1,10 +1,11 @@
-import Router from './router/router';
+import { MainProvider } from './providers';
+import { Router } from './router';
 
 function App() {
   return (
-    <>
+    <MainProvider>
       <Router />
-    </>
+    </MainProvider>
   );
 }
 
