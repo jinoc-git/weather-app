@@ -20,6 +20,9 @@
 }
 
 @layer utilities {
+  .bg-gradient-base {
+    @apply bg-linear-to-b from-blue-400 via-sky-300 to-cyan-700;
+  }
   .animation-delay-2000 {
     animation-delay: 2s;
   }
