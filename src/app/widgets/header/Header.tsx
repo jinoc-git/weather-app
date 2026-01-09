@@ -1,4 +1,4 @@
-import { Menu } from 'lucide-react';
+import { Menu, Search } from 'lucide-react';
 
 export const Header = () => {
   return (
@@ -6,9 +6,9 @@ export const Header = () => {
       <button className="p-2 bg-white/40 rounded-full hover:bg-white/60 transition">
         <Menu size={24} className="text-slate-700" />
       </button>
-      <div className="flex items-center gap-2">
-        <span className="font-bold text-lg">Weather-App</span>
-      </div>
+      <button className="p-2 bg-white/40 rounded-full hover:bg-white/60 transition">
+        <Search size={24} className="text-slate-700" />
+      </button>
     </header>
   );
 };

@@ -9,7 +9,7 @@ type Props = {
 
 export const Card = ({ tmp, tmn, tmx }: Props) => {
   return (
-    <div className="relative flex-1 flex flex-col justify-between gap-5 w-full h-full max-h-[700px] pt-10 bg-white/30 backdrop-blur-xl rounded-[40px] shadow-2xl border border-white/40 overflow-hidden text-slate-700 ">
+    <div className="relative flex-1 flex flex-col justify-between gap-5 w-full h-full max-h-[700px] max-w-[400px] pt-10 bg-white/30 backdrop-blur-xl rounded-[40px] shadow-2xl border border-white/40 overflow-hidden text-slate-700 ">
       <div className=" flex flex-col items-center justify-center">
         <WeatherVisual weatherStatus="clear" size={140} animate background />
 

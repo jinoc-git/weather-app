@@ -1,5 +1,7 @@
 import { WeatherVisual } from '@/shared/ui';
 import type { WeatherStatus } from '@/shared/ui/weatherVisual/WeatherVisual';
+import { motion } from 'motion/react';
+import { useRef } from 'react';
 
 export const HourlyWeather = () => {
   const eg: {
@@ -13,10 +15,16 @@ export const HourlyWeather = () => {
     { time: '15시', status: 'rain', tmp: 25 },
     { time: '16시', status: 'clouds', tmp: 24 },
   ];
+  const wrapperRef = useRef(null);
 
   return (
-    <div className=" p-6 pb-10">
-      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+    <div ref={wrapperRef} className=" p-6 pb-10 overflow-x-auto no-scrollbar">
+      <motion.div
+        drag="x"
+        dragConstraints={wrapperRef}
+        dragElastic={0.2}
+        whileTap={{ cursor: 'grabbing' }}
+        className="flex gap-4  pb-4 ">
         {eg.map((item, idx) => (
           <div
             key={idx}
@@ -30,7 +38,7 @@ export const HourlyWeather = () => {
             <span className="font-bold">{item.tmp}°</span>
           </div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

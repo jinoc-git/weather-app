@@ -23,6 +23,9 @@
   .bg-gradient-base {
     @apply bg-linear-to-b from-blue-400 via-sky-300 to-cyan-700;
   }
+  .no-scrollbar {
+    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+  }
   .animation-delay-2000 {
     animation-delay: 2s;
   }
