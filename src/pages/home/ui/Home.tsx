@@ -10,6 +10,11 @@ export const HomePage = () => {
   return (
     <>
       <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
+      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
+      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
+      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
+      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
+      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
     </>
   );
 };
