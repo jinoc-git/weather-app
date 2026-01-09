@@ -1,10 +1,13 @@
+import { MainLayout } from '@/app/layout';
 import { MainProvider } from './providers';
 import { Router } from './router';
 
 function App() {
   return (
     <MainProvider>
-      <Router />
+      <MainLayout>
+        <Router />
+      </MainLayout>
     </MainProvider>
   );
 }
