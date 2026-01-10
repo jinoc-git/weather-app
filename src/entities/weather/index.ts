@@ -1,6 +1,5 @@
 export { KOREA_DISTRICT } from './model';
 export type {
-  DistrictCoordinate,
   WeatherCategory,
   WeatherInfo,
   HourlyWeather,

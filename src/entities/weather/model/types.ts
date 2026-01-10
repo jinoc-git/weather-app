@@ -1,7 +1,4 @@
-export type DistrictCoordinate = {
-  nx: number;
-  ny: number;
-};
+import type { DistrictCoordinate } from '@/shared';
 
 export type WeatherCategory =
   | 'POP' // 강수 확률 %
