@@ -50,7 +50,7 @@ export const HomePage = () => {
           return <div>로딩중...</div>; // 스켈레톤 추가 예정
         }
 
-        return <Card data={data} />;
+        return <Card key={data.nickname} data={data} />;
       })}
     </>
   );

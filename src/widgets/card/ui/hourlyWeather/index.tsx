@@ -1,43 +1,60 @@
+import { getWeatherUI, type DailyWeatherData } from '@/entities/weather';
 import { WeatherVisual } from '@/shared/ui';
-import type { WeatherStatus } from '@/shared/ui/weatherVisual/WeatherVisual';
 import { motion } from 'motion/react';
-import { useRef } from 'react';
+import { useEffectEvent, useLayoutEffect, useRef, useState } from 'react';
 
-export const HourlyWeather = () => {
-  const eg: {
-    time: string;
-    status: WeatherStatus;
-    tmp: number;
-  }[] = [
-    { time: '지금', status: 'clear', tmp: 24 },
-    { time: '13시', status: 'cloudsun', tmp: 26 },
-    { time: '14시', status: 'cloudsun', tmp: 27 },
-    { time: '15시', status: 'rain', tmp: 25 },
-    { time: '16시', status: 'clouds', tmp: 24 },
-  ];
-  const wrapperRef = useRef(null);
+type Props = {
+  data: DailyWeatherData;
+};
+
+export const HourlyWeather = ({ data }: Props) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // 초기값: 왼쪽으로 0만큼만 이동 가능 (이동 불가)
+  const [constraints, setConstraints] = useState({ left: 0, right: 0 });
+
+  const updateContentDragArea = useEffectEvent((distance: number) => {
+    setConstraints({ left: distance > 0 ? 0 : distance, right: 0 });
+  });
+
+  useLayoutEffect(() => {
+    if (!wrapperRef.current || !contentRef.current) return;
+
+    const contentWidth = contentRef.current.scrollWidth;
+    const wrapperWidth = wrapperRef.current.offsetWidth;
+    const paddingBuffer = 48;
+    const distance = -(contentWidth - wrapperWidth + paddingBuffer);
+    updateContentDragArea(distance);
+  }, [data.items]);
 
   return (
-    <div ref={wrapperRef} className=" p-6 pb-10 overflow-x-auto no-scrollbar">
+    <div
+      ref={wrapperRef}
+      className=" p-6 pb-10 overflow-x-auto no-scrollbar w-full ">
       <motion.div
+        ref={contentRef}
         drag="x"
-        dragConstraints={wrapperRef}
+        dragConstraints={constraints}
         dragElastic={0.2}
+        whileDrag="dragging"
         whileTap={{ cursor: 'grabbing' }}
         className="flex gap-4  pb-4 ">
-        {eg.map((item, idx) => (
-          <div
-            key={idx}
-            className={`w-1/3 min-w-[64px] max-w-[150px] flex flex-col items-center gap-3 p-3 rounded-2xl text-white `}>
-            <span className="text-sm font-medium">{item.time}</span>
-            <WeatherVisual
-              weatherStatus={item.status}
-              size={30}
-              animate={false}
-            />
-            <span className="font-bold">{item.tmp}°</span>
-          </div>
-        ))}
+        {data.items.map((item) => {
+          const { status } = getWeatherUI(item.sky, item.pty, item.sno);
+          // const isNow = item.dt === data.nowDt;
+          const hour = parseInt(item.time.substring(0, 2), 10);
+
+          return (
+            <div
+              key={`${data.placeName}-${item.dt}`}
+              className={`w-1/3 min-w-[64px] max-w-[150px] flex flex-col items-center gap-3 p-3 rounded-2xl text-white `}>
+              <span className={`text-sm font-medium`}>{hour}시</span>
+              <WeatherVisual weatherStatus={status} size={30} animate={false} />
+              <span className="font-bold">{item.tmp}°</span>
+            </div>
+          );
+        })}
       </motion.div>
     </div>
   );
