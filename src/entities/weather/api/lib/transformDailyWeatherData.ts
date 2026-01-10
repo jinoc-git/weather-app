@@ -71,8 +71,15 @@ export const transformDailyWeatherData = (
     (a, b) => (a.dt || 0) - (b.dt || 0)
   ) as HourlyWeather[];
 
-  // [Step 3] 표시 범위 필터링 (엣지 케이스 적용)
+  // [Step 3] 표시 범위 필터링 (엣지 케이스 적용) 및 현재 시각 날씨 구하기
   const currentHour = now.getHours();
+  const currentKey = parseInt(
+    `${todayStr}${String(currentHour).padStart(2, '0')}00`
+  );
+  // 정렬된 리스트에서 현재 시간과 일치하는 데이터를 찾음
+  const currentItem = sortedItems.find((item) => item.dt === currentKey);
+  const nowTmp = currentItem?.tmp ?? null;
+
   const tomorrowStr = format(addDays(now, 1), 'yyyyMMdd');
 
   let startHour = 5;
@@ -114,5 +121,6 @@ export const transformDailyWeatherData = (
     items: filteredItems,
     todayMin: minTemp,
     todayMax: maxTemp,
+    nowTmp,
   };
 };

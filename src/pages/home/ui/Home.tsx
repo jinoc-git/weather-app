@@ -2,22 +2,44 @@ import { Card } from '@/widgets/card';
 import { useGetDailyWeather } from '@/features/weather/api';
 
 export const HomePage = () => {
-  const eg = {
-    tmp: 24,
-    tmn: 18,
-    tmx: 28,
-  };
+  const eg = [
+    {
+      nx: 55,
+      ny: 127,
+    },
+    {
+      nx: 60,
+      ny: 127,
+    },
+    {
+      nx: 61,
+      ny: 127,
+    },
+    {
+      nx: 60,
+      ny: 126,
+    },
+    {
+      nx: 59,
+      ny: 126,
+    },
+    {
+      nx: 62,
+      ny: 127,
+    },
+  ];
 
-  const { data } = useGetDailyWeather({ nx: 55, ny: 127 });
-  console.log(data);
+  const result = useGetDailyWeather(eg);
+  console.log(result);
   return (
     <>
-      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
-      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
-      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
-      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
-      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
-      <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />
+      {result.map(({ data, isLoading }) => {
+        if (isLoading || !data) {
+          return <div>로딩중...</div>;
+        }
+
+        return <Card data={data} />;
+      })}
     </>
   );
 };

@@ -45,4 +45,5 @@ export type DailyWeatherData = {
   items: HourlyWeather[];
   todayMin: number | null;
   todayMax: number | null;
+  nowTmp: number | null;
 };
