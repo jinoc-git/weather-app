@@ -1,34 +1,30 @@
+import { mapCityRdoToDto, type CityDto } from '@/entities/search';
 import { getCityListRaw } from '@/entities/search/api/getCityList';
-import type { CityDto } from '@/entities/search/dto';
-import { mapCityRdoToDto } from '@/entities/search/lib';
-import { normalizeString } from '@/features/search/lib';
-import { useState, useMemo } from 'react';
+import { normalizeString } from '@/shared';
+import { useMemo } from 'react';
 
-export const useCitySearch = () => {
-  const [query, setQuery] = useState('');
-
-  const { normalizedData: allKeys, rawData } = getCityListRaw();
+export const useCitySearch = (keyword: string) => {
+  const { normalizedData: allKeys, rawData } = useMemo(() => {
+    return getCityListRaw();
+  }, []);
 
   const results = useMemo(() => {
-    if (!query || query.trim().length === 0) return [];
+    if (!keyword || keyword.trim().length === 0) return [];
 
-    const normalizedQuery = normalizeString(query);
+    const normalizedQuery = normalizeString(keyword);
     const MAX_RESULTS = 50;
 
     const matchedKeys = [];
-    for (const key of allKeys) {
-      if (key.normalizedKey.includes(normalizedQuery)) {
-        matchedKeys.push(key.originalKey);
+    for (const item of allKeys) {
+      if (item.normalizedKey.includes(normalizedQuery)) {
+        matchedKeys.push(item.originalKey);
       }
-
       if (matchedKeys.length >= MAX_RESULTS) break;
     }
 
     const flattenedResults: CityDto[] = [];
-
     for (const key of matchedKeys) {
       const cityList = rawData[key];
-
       for (const cityRdo of cityList) {
         flattenedResults.push(mapCityRdoToDto(cityRdo));
         if (flattenedResults.length >= MAX_RESULTS) return flattenedResults;
@@ -36,7 +32,7 @@ export const useCitySearch = () => {
     }
 
     return flattenedResults;
-  }, [query, allKeys, rawData]);
+  }, [keyword, allKeys, rawData]);
 
-  return { query, setQuery, results };
+  return { results };
 };

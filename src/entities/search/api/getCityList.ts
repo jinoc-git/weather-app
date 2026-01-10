@@ -1,5 +1,5 @@
 import { RAW_CITY_DATA, type RawCityData } from '@/entities/search/model';
-import { normalizeString } from '@/features/search/lib';
+import { normalizeString } from '@/shared';
 
 const normalizedData = Object.keys(RAW_CITY_DATA).map((key) => ({
   originalKey: key,
