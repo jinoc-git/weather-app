@@ -12,7 +12,12 @@ export const Card = ({ data }: Props) => {
     <div className="relative flex-1 md:flex-none w-full h-full max-h-[700px] max-w-[400px] rounded-[40px] shadow-2xl">
       <div className="flex flex-col justify-between gap-5 w-full h-full rounded-[40px] text-slate-700 border border-white/40 ">
         <div className=" flex flex-col items-center justify-center">
-          <CardHeader placeName="경기도 파주" isFixed={false} bookMark />
+          <CardHeader
+            placeName={data.placeName}
+            nickname={data.nickname}
+            isFixed={false}
+            bookMark
+          />
           <WeatherVisual weatherStatus="clear" size={140} animate background />
 
           <h3 className="text-8xl font-bold text-white mt-4 tracking-tighter">

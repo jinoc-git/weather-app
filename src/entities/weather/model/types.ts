@@ -41,9 +41,14 @@ export type HourlyWeather = {
   reh: number; // REH: 습도 (%)
 };
 
+export type WeatherDataIdenty = {
+  placeName: string;
+  nickname: string | null;
+};
+
 export type DailyWeatherData = {
   items: HourlyWeather[];
   todayMin: number | null;
   todayMax: number | null;
   nowTmp: number | null;
-};
+} & WeatherDataIdenty;

@@ -1,11 +1,12 @@
 import { parseWeatherValue } from '@/entities/weather/api/lib';
-import type { WeatherInfo } from '@/entities/weather/model';
+import type { WeatherDataIdenty, WeatherInfo } from '@/entities/weather/model';
 import type { DailyWeatherData, HourlyWeather } from '@/entities/weather/model';
 import { addDays, format } from 'date-fns';
 
 export const transformDailyWeatherData = (
   now: Date,
-  items: WeatherInfo[]
+  items: WeatherInfo[],
+  identy: WeatherDataIdenty
 ): DailyWeatherData => {
   const grouped = new Map<string, Partial<HourlyWeather>>();
 
@@ -122,5 +123,6 @@ export const transformDailyWeatherData = (
     todayMin: minTemp,
     todayMax: maxTemp,
     nowTmp,
+    ...identy,
   };
 };

@@ -5,4 +5,5 @@ export type {
   WeatherInfo,
   HourlyWeather,
   DailyWeatherData,
+  WeatherDataIdenty,
 } from './types';
