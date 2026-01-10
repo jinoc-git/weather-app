@@ -1,6 +1,5 @@
 import { Card } from '@/widgets/card';
-import { getDailyWeather } from '@/entities/weather/api';
-import React, { useEffect } from 'react';
+import { useGetDailyWeather } from '@/features/weather/api';
 
 export const HomePage = () => {
   const eg = {
@@ -9,14 +8,8 @@ export const HomePage = () => {
     tmx: 28,
   };
 
-  useEffect(() => {
-    const now = new Date();
-    getDailyWeather({
-      nx: 55,
-      ny: 127,
-      now,
-    });
-  }, []);
+  const { data } = useGetDailyWeather({ nx: 55, ny: 127 });
+  console.log(data);
   return (
     <>
       <Card tmp={eg.tmp} tmn={eg.tmn} tmx={eg.tmx} />

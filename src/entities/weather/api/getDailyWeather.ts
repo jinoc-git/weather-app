@@ -58,13 +58,10 @@ export const fetchFutureDayWeather = async ({
 };
 
 export const getDailyWeather = async ({ nx, ny, now }: GetDailyWeatherDto) => {
-  const [pastData, futureData] = await Promise.all([
+  const data = await Promise.all([
     fetchPastDayWeather({ nx, ny, now }),
     fetchFutureDayWeather({ nx, ny, now }),
   ]);
 
-  const data = pastData.concat(futureData);
-
-  console.log(data);
   return data;
 };
