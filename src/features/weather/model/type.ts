@@ -1,6 +1,3 @@
-import type {
-  DistrictCoordinate,
-  WeatherDataIdenty,
-} from '@/entities/weather/model';
+import type { DistrictCoordinate, WeatherDataIdenty } from '@/entities/weather';
 
 export type UseGetDailyWeatherParams = WeatherDataIdenty & DistrictCoordinate;

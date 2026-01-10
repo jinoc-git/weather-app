@@ -77,9 +77,15 @@ export const transformDailyWeatherData = (
   const currentKey = parseInt(
     `${todayStr}${String(currentHour).padStart(2, '0')}00`
   );
+
   // 정렬된 리스트에서 현재 시간과 일치하는 데이터를 찾음
   const currentItem = sortedItems.find((item) => item.dt === currentKey);
+
   const nowTmp = currentItem?.tmp ?? null;
+  // 👇 추가된 부분: 현재 날씨 상태(Sky), 강수 형태(Pty), 적설량(Sno) 추출
+  const nowSky = currentItem?.sky ?? 1; // 기본값 맑음(1)
+  const nowPty = currentItem?.pty ?? 0; // 기본값 없음(0)
+  const nowSno = currentItem?.sno ?? 0; // 기본값 적설없음(0)
 
   const tomorrowStr = format(addDays(now, 1), 'yyyyMMdd');
 
@@ -123,6 +129,9 @@ export const transformDailyWeatherData = (
     todayMin: minTemp,
     todayMax: maxTemp,
     nowTmp,
+    nowSky,
+    nowPty,
+    nowSno,
     ...identy,
   };
 };

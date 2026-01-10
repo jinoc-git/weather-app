@@ -2,5 +2,5 @@ export {
   calculatePastQueryParams,
   calculateFutureQueryParams,
 } from './weatherParamsCalculator';
-export { parseWeatherValue } from './parswWeatherValue';
+export { parseWeatherValue } from './parseWeatherValue';
 export { transformDailyWeatherData } from './transformDailyWeatherData';

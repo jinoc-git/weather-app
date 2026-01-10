@@ -1,7 +1,4 @@
-import {
-  getDailyWeather,
-  transformDailyWeatherData,
-} from '@/entities/weather/api';
+import { getDailyWeather, transformDailyWeatherData } from '@/entities/weather';
 import type { UseGetDailyWeatherParams } from '@/features/weather/model';
 import { useQueries } from '@tanstack/react-query';
 

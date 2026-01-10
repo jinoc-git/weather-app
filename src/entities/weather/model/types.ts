@@ -51,4 +51,7 @@ export type DailyWeatherData = {
   todayMin: number | null;
   todayMax: number | null;
   nowTmp: number | null;
+  nowSky: number;
+  nowPty: number;
+  nowSno: number;
 } & WeatherDataIdenty;
