@@ -1,4 +1,4 @@
-import { Header } from '@/app/widgets/header';
+import { Header } from '@/widgets/header';
 import { type ReactNode } from 'react';
 
 type Props = {

@@ -1,0 +1,1 @@
+export { useGetDailyWeather } from './useGetDaliyWeather';
