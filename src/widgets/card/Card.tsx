@@ -39,7 +39,7 @@ export const Card = ({ data }: Props) => {
           </div>
         </div>
 
-        <HourlyWeather />
+        <HourlyWeather data={data} />
       </div>
     </div>
   );

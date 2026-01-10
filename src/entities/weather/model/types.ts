@@ -54,4 +54,5 @@ export type DailyWeatherData = {
   nowSky: number;
   nowPty: number;
   nowSno: number;
+  nowDt: number;
 } & WeatherDataIdenty;

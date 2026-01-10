@@ -132,6 +132,7 @@ export const transformDailyWeatherData = (
     nowSky,
     nowPty,
     nowSno,
+    nowDt: currentKey,
     ...identy,
   };
 };
