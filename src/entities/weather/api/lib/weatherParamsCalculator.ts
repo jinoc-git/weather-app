@@ -1,34 +1,36 @@
-import type { CalcQueryParamRdo } from '@/features/weather/api/rdo';
-import { format } from 'date-fns';
+import type { CalcQueryParamRdo } from '@/entities/weather/api/rdo';
+import { format, subDays } from 'date-fns';
 
 const DATA_COUNT = 12;
 
 /**
  * 1. 과거 날씨 조회용 파라미터 계산 (오늘 05:00 ~ 현재 시간 - 1시간)
- * 전략: 무조건 오늘 '0200' BaseTime을 사용합니다.
+ * 전략: 오늘 '0200' BaseTime을 사용합니다.
  * 이유: '0200' 예보는 '0300'부터의 데이터를 제공하므로 '0500' 데이터를 확실히 포함합니다.
  */
 export const calculatePastQueryParams = (now: Date): CalcQueryParamRdo => {
   const currentHour = now.getHours();
-  const todayStr = format(now, 'yyyyMMdd');
+  let baseDate = format(now, 'yyyyMMdd');
+  let baseTime = '0200'; // 기본값
 
-  // 데이터 시작 시간: 03시 (Base 02시 + 1)
-  // 목표 종료 시간: 현재 시간 - 1시 (현재 시간 18시라면 17시 데이터까지 필요)
-  // 예: 18시 기준 -> 03시~17시 데이터 필요 (15시간)
-  // 단, 현재 시간이 05시 미만이면 과거 데이터를 조회할 필요가 없거나 전날 데이터를 봐야 함(이 경우는 예외처리 혹은 0리턴)
-
-  let hoursNeeded = 0;
-  if (currentHour > 3) {
-    hoursNeeded = currentHour - 1 - 3 + 1;
+  // 🚨 새벽 예외 처리: 00시 ~ 02시 10분 사이
+  // 아직 오늘 02시 예보가 안 나왔으므로, "어제 23시" 예보를 사용해야 함
+  if (currentHour < 2) {
+    baseDate = format(subDays(now, 1), 'yyyyMMdd'); // 어제 날짜
+    baseTime = '2300'; // 어제 마지막 BaseTime
   }
 
-  // 여유 있게 +1 시간 더 계산 (혹시 모를 누락 방지)
-  const safeRows = (hoursNeeded + 1) * DATA_COUNT;
+  // 필요한 시간 계산
+  // 예: 01시 조회 -> 어제 23시 Base 사용 -> 00시부터 데이터 나옴 -> 00시~01시 데이터 필요
+  // 예: 18시 조회 -> 오늘 02시 Base 사용 -> 03시부터 데이터 나옴 -> 03시~18시 데이터 필요
+
+  // 넉넉하게 잡기 위해 계산 로직보다는 그냥 충분히(24시간분) 요청하고 필터링하는 게 안전함
+  // 어제 23시 Base로 조회하면 오늘 00시부터 데이터가 쭈욱 나옴.
 
   return {
-    base_date: todayStr,
-    base_time: '0200',
-    numOfRows: Math.max(0, safeRows), // 음수 방지
+    base_date: baseDate,
+    base_time: baseTime,
+    numOfRows: 1000, // 계산 복잡도를 줄이기 위해 넉넉히 요청 (어차피 텍스트라 용량 작음)
   };
 };
 

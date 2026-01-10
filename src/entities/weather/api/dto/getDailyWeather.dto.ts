@@ -1,4 +1,4 @@
-import type { DistrictCoordinate } from '@/features/weather/model';
+import type { DistrictCoordinate } from '@/entities/weather/model';
 
 export type GetDailyWeatherDto = {
   now: Date;

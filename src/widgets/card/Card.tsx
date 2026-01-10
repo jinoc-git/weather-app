@@ -1,6 +1,6 @@
-import { HourlyWeather } from '@/app/widgets/card/ui';
-import { CardHeader } from '@/app/widgets/card/ui/cardHeader';
+import { CardHeader } from '@/widgets/card/ui/cardHeader';
 import { WeatherVisual } from '@/shared/ui';
+import { HourlyWeather } from '@/widgets/card/ui';
 
 type Props = {
   tmp: number; // 1시간 기온

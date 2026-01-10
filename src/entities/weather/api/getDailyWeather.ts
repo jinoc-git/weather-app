@@ -1,10 +1,10 @@
-import type { GetDailyWeatherDto } from '@/features/weather/api/dto';
+import type { GetDailyWeatherDto } from '@/entities/weather/api/dto';
 import {
   calculateFutureQueryParams,
   calculatePastQueryParams,
-} from '@/features/weather/api/lib';
-import type { WeatherApiRto } from '@/features/weather/api/rdo';
-import type { WeatherInfo } from '@/features/weather/model/types';
+} from '@/entities/weather/api/lib';
+import type { WeatherApiRto } from '@/entities/weather/api/rdo';
+import type { WeatherInfo } from '@/entities/weather/model/types';
 import { weatherApi } from '@/shared/api';
 
 // 1. 과거 날씨 데이터 조회 (오늘 05시 ~ 현재 직전)

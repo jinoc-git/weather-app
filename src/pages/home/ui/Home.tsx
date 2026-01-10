@@ -1,5 +1,5 @@
-import { Card } from '@/app/widgets/card';
-import { getDailyWeather } from '@/features/weather/api';
+import { Card } from '@/widgets/card';
+import { getDailyWeather } from '@/entities/weather/api';
 import React, { useEffect } from 'react';
 
 export const HomePage = () => {
