@@ -16,10 +16,6 @@ export const CardHeader = ({
   const name = nickname ?? placeName;
   return (
     <div className="w-full h-16 p-4 flex justify-between items-center text-white">
-      <div className="flex gap-2 items-center  font-bold text-xl">
-        <MapPin size={24} />
-        <p>{name}</p>
-      </div>
       {isFixed ? null : (
         <button>
           <Star
@@ -30,6 +26,10 @@ export const CardHeader = ({
           />
         </button>
       )}
+      <div className="flex gap-2 items-center  font-bold text-xl">
+        <MapPin size={24} />
+        <p>{name}</p>
+      </div>
     </div>
   );
 };
