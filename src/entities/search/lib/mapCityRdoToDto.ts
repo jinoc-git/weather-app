@@ -13,6 +13,7 @@ export const mapCityRdoToDto = (rdo: CityRdo): CityDto => {
     id: rdo.id,
     placeName,
     address,
+    nickname: null,
     nx: rdo.nx,
     ny: rdo.ny,
   };

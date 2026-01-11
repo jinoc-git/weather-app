@@ -1,3 +1,4 @@
+import type { CityIdenty } from '@/entities/search';
 import type { DistrictCoordinate } from '@/shared';
 
 export type WeatherCategory =
@@ -38,13 +39,6 @@ export type HourlyWeather = {
   reh: number; // REH: 습도 (%)
 };
 
-export type WeatherDataIdenty = {
-  id: number; // 행정구역 코드
-  address: string; // 주소
-  placeName: string; // 간략한 주소 ("서울특별시 종로구 효자동" -> "효자동")
-  nickname: string | null; // 사용자가 설정한 이름
-};
-
 export type DailyWeatherData = {
   items: HourlyWeather[];
   todayMin: number | null;
@@ -54,4 +48,4 @@ export type DailyWeatherData = {
   nowPty: number;
   nowSno: number;
   nowDt: number;
-} & WeatherDataIdenty;
+} & CityIdenty;
