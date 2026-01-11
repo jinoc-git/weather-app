@@ -37,7 +37,7 @@ export const SearchModal = ({ isOpen, onClose, onSelect }: Props) => {
         onClose={handleClose}
       />
 
-      <div className="flex-1 overflow-y-auto px-2 pb-10 scrollbar-hide">
+      <div className="flex-1 overflow-y-auto px-2 pb-10 custom-scrollbar-dark">
         <SearchResults
           results={results}
           hasQuery={!!inputValue}
