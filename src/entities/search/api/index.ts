@@ -1,2 +1,3 @@
-export { getRawCityList } from './getRawCityList';
-export { getCityData } from './getCityData';
+export { getNomalizedCityList } from './getNomalizedCityList';
+export { getCityDataById } from './getCityDataById';
+export { getCityDataByGrid } from './getCityDataByGrid';

@@ -1,12 +1,10 @@
 import { WeatherVisual } from '@/shared/ui';
 import { getWeatherUI, type DailyWeatherData } from '@/entities/weather';
-import {
-  CardHeader,
-  CardInfo,
-  CardLayout,
-  HourlyWeather,
-} from '@/widgets/card/ui';
 import { useBookmarkAction } from '@/features/bookmark';
+import { CardLayout } from '@/widgets/card/ui/cardLayoutComp';
+import { CardHeader } from '@/widgets/card/ui/cardHeader';
+import { CardInfo } from '@/widgets/card/ui/cardInfo';
+import { HourlyWeather } from '@/widgets/card/ui/hourlyWeather';
 
 type Props = {
   isCurrentLocation?: boolean;

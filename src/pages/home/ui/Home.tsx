@@ -1,37 +1,35 @@
 import { useBookmarkStore } from '@/entities/bookmark';
+import { useLocationStore } from '@/entities/location';
 import { useGetDaliyWeatherList } from '@/features/weather/model';
 import { Card, CardSkeleton } from '@/widgets/card';
 import { useMemo } from 'react';
 
 export const HomePage = () => {
   const bookmarks = useBookmarkStore((state) => state.bookmarks);
-
-  // 추후 현재 위치로 변경 예정
-  const currentLocation = useMemo(
-    () => ({
-      id: 1111053000,
-      nx: 60,
-      ny: 127,
-      address: '서울특별시 종로구 사직동',
-      placeName: '사직동',
-      nickname: '나의 위치',
-    }),
-    []
-  );
+  const {
+    myLocation,
+    isLoading: isLocLoading,
+    // error, // 에러 발생했을 때 처리 및 UI 필요
+  } = useLocationStore();
 
   const cityList = useMemo(() => {
-    return [currentLocation, ...bookmarks];
-  }, [currentLocation, bookmarks]);
+    if (myLocation) return [myLocation, ...bookmarks];
+    return bookmarks;
+  }, [myLocation, bookmarks]);
 
   const result = useGetDaliyWeatherList(cityList);
 
   return (
     <>
+      {!myLocation && isLocLoading && <CardSkeleton />}
+
       {result.map(({ data, isLoading }, i) => {
-        if (isLoading || !data) return <CardSkeleton key={`${i}-loading`} />;
+        if (isLoading || !data) return <CardSkeleton key={`loading-${i}`} />;
 
         const displayData = { ...data, nickname: cityList[i].nickname };
-        const isCurrentLocation = i === 0;
+        const isCurrentLocation = myLocation
+          ? myLocation.address === data.address
+          : false;
         return (
           <Card
             key={data.address}

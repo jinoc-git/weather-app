@@ -1,5 +1,5 @@
 import {
-  getRawCityList,
+  getNomalizedCityList,
   mapCityRdoToDto,
   type CityDto,
 } from '@/entities/search';
@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 
 export const useCitySearch = (keyword: string) => {
   const { normalizedData: allKeys, rawData } = useMemo(() => {
-    return getRawCityList();
+    return getNomalizedCityList();
   }, []);
 
   const results = useMemo(() => {

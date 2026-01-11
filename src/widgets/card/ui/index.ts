@@ -1,4 +1,2 @@
-export { HourlyWeather, HourlyWeatherSkeleton } from './hourlyWeather';
-export { CardLayout } from './cardLayoutComp';
-export { CardInfo, CardInfoSkeleton } from './cardInfo';
-export { CardHeader, CardHeaderSkeleton } from './cardHeader';
+export { Card } from './Card';
+export { CardSkeleton } from './Card.skeleton';
