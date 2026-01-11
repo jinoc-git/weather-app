@@ -1,10 +1,7 @@
+import type { CityDto } from '@/entities/search';
 import { getDailyWeather, transformDailyWeatherData } from '@/entities/weather';
-import type { UseGetDailyWeatherParams } from '@/features/weather/model';
 
-export const fetchDatilyWeather = async (
-  now: Date,
-  params: UseGetDailyWeatherParams
-) => {
+export const fetchDatilyWeather = async (now: Date, params: CityDto) => {
   const { id, nx, ny, address, placeName, nickname } = params;
 
   const [pastItems, futureItems] = await getDailyWeather({ nx, ny, now });

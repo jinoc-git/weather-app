@@ -23,8 +23,13 @@ const createCityIdMap = (): RawCityDataById => {
 
 const rawCityDataById = createCityIdMap();
 
-export const getCityData = (cityId: number, addr: string): CityDto | null => {
-  const data = rawCityDataById.get(cityId);
+export const getCityData = (
+  cityId: string | undefined,
+  addr: string | null
+): CityDto | null => {
+  if (!cityId || !addr) return null;
+
+  const data = rawCityDataById.get(Number(cityId));
   if (!data) return null;
 
   const targetCity = data.find((city) => {
