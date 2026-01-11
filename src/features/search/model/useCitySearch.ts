@@ -1,11 +1,14 @@
-import { mapCityRdoToDto, type CityDto } from '@/entities/search';
-import { getCityListRaw } from '@/entities/search/api/getCityList';
+import {
+  getRawCityList,
+  mapCityRdoToDto,
+  type CityDto,
+} from '@/entities/search';
 import { normalizeString } from '@/shared';
 import { useMemo } from 'react';
 
 export const useCitySearch = (keyword: string) => {
   const { normalizedData: allKeys, rawData } = useMemo(() => {
-    return getCityListRaw();
+    return getRawCityList();
   }, []);
 
   const results = useMemo(() => {

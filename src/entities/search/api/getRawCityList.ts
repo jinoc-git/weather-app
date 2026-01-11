@@ -6,7 +6,7 @@ const normalizedData = Object.keys(RAW_CITY_DATA).map((key) => ({
   normalizedKey: normalizeString(key),
 }));
 
-export const getCityListRaw = (): {
+export const getRawCityList = (): {
   normalizedData: typeof normalizedData;
   rawData: RawCityData;
 } => {
