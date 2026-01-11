@@ -1,4 +1,3 @@
-export { KOREA_DISTRICT } from './model';
 export type {
   WeatherCategory,
   WeatherInfo,

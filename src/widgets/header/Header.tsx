@@ -9,7 +9,8 @@ export const Header = () => {
   const searchModal = useModal();
 
   const handleSelectCity = (cityData: CityDto) => {
-    navigate(`/detail/${cityData.id}`);
+    const encodeAddr = encodeURIComponent(cityData.address);
+    navigate(`/detail/${cityData.id}?addr=${encodeAddr}`);
     searchModal.close();
   };
 

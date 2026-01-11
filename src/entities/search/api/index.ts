@@ -1,2 +1,2 @@
 export { getRawCityList } from './getRawCityList';
-export { getCityById } from './getCityById';
+export { getCityData } from './getCityData';
