@@ -45,9 +45,9 @@ export const HomePage = () => {
 
   return (
     <>
-      {result.map(({ data, isLoading }) => {
+      {result.map(({ data, isLoading }, i) => {
         if (isLoading || !data) {
-          return <div>로딩중...</div>; // 스켈레톤 추가 예정
+          return <div key={`${i}-loading`}>로딩중...</div>; // 스켈레톤 추가 예정
         }
 
         return <Card key={data.nickname} data={data} />;
