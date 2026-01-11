@@ -5,12 +5,13 @@ import { useQueries } from '@tanstack/react-query';
 export const useGetDailyWeather = (coords: UseGetDailyWeatherParams[]) => {
   const now = new Date();
   return useQueries({
-    queries: coords.map(({ id, nx, ny, placeName, nickname }) => ({
-      queryKey: ['dailyWeather', id],
+    queries: coords.map(({ id, nx, ny, address, placeName, nickname }) => ({
+      queryKey: ['dailyWeather', id, placeName],
       queryFn: async () => {
         const [pastItems, futureItems] = await getDailyWeather({ nx, ny, now });
         const allItems = [...pastItems, ...futureItems];
         return transformDailyWeatherData(now, allItems, {
+          address,
           id,
           placeName,
           nickname,

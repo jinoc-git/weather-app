@@ -39,9 +39,10 @@ export type HourlyWeather = {
 };
 
 export type WeatherDataIdenty = {
-  id: number;
-  placeName: string;
-  nickname: string | null;
+  id: number; // 행정구역 코드
+  address: string; // 주소
+  placeName: string; // 간략한 주소 ("서울특별시 종로구 효자동" -> "효자동")
+  nickname: string | null; // 사용자가 설정한 이름
 };
 
 export type DailyWeatherData = {
