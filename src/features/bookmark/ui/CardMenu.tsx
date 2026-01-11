@@ -1,0 +1,45 @@
+import { useState } from 'react';
+import { MoreVertical, Edit2 } from 'lucide-react';
+import { Dropdown } from '@/shared/ui';
+import { RenameModal } from './RenameModal';
+import { useBookmarkStore } from '@/entities/bookmark';
+
+type Props = {
+  address: string;
+  currentNickname: string;
+};
+
+export const CardMenu = ({ address, currentNickname }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const updateNickname = useBookmarkStore((state) => state.updateNickname);
+
+  const handleSaveNickname = (newNickname: string) => {
+    updateNickname(address, newNickname);
+    setIsModalOpen(false);
+  };
+
+  return (
+    <>
+      <Dropdown className="absolute top-4 right-4">
+        <Dropdown.Trigger className="p-1.5 rounded-full text-white/70 hover:bg-white/10 hover:text-white transition cursor-pointer">
+          <MoreVertical size={20} />
+        </Dropdown.Trigger>
+
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={() => setIsModalOpen(true)}>
+            <Edit2 size={14} />
+            <span>이름 변경</span>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+      <RenameModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        initialValue={currentNickname}
+        onSave={handleSaveNickname}
+      />
+    </>
+  );
+};

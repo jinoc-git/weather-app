@@ -1,0 +1,1 @@
+export { useBookmarkAction } from './useBookmarkAction';

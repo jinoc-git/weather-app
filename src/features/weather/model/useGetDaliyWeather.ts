@@ -6,7 +6,7 @@ export const useGetDailyWeather = (params: CityDto | null) => {
   const now = new Date();
 
   return useQuery({
-    queryKey: ['dailyWeather', params?.id, params?.placeName],
+    queryKey: ['dailyWeather', params?.id, params?.address],
     queryFn: () => {
       if (!params) throw new Error('지역 정보가 없습니다');
       return fetchDatilyWeather(now, params);

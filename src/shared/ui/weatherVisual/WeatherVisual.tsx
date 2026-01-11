@@ -1,3 +1,4 @@
+import { cn } from '@/shared/lib';
 import {
   Sun,
   Cloud,
@@ -68,7 +69,10 @@ export const WeatherVisual = ({
 
   return (
     <div
-      className={`relative w-full flex items-center justify-center shrink-0 ${className}`}>
+      className={cn(
+        'relative w-full flex items-center justify-center shrink-0',
+        className
+      )}>
       {background ? (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
