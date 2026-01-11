@@ -15,13 +15,13 @@ export const Header = () => {
   return (
     <>
       <header className="w-full flex justify-between items-center py-4 px-6 relative z-10">
-        <button className="p-2 bg-white/40 backdrop-blur-sm rounded-full hover:bg-white/60 transition text-slate-800">
+        <button className="p-2 bg-white/40 backdrop-blur-sm rounded-full hover:bg-white/60 transition text-slate-800 cursor-pointer">
           <Menu size={24} />
         </button>
 
         <button
           onClick={searchModal.open}
-          className="p-2 bg-white/40 backdrop-blur-sm rounded-full hover:bg-white/60 transition text-slate-800">
+          className="p-2 bg-white/40 backdrop-blur-sm rounded-full hover:bg-white/60 transition text-slate-800 cursor-pointer">
           <Search size={24} />
         </button>
       </header>

@@ -10,7 +10,7 @@ export const mapCityRdoToDto = (rdo: CityRdo): CityDto => {
   const placeName = addressParts[addressParts.length - 1];
 
   return {
-    id: rdo.addr, // ID가 없으므로 주소 자체를 고유 키로 사용
+    id: rdo.id, // ID가 없으므로 주소 자체를 고유 키로 사용
     placeName: placeName,
     address: rdo.addr,
     nx: rdo.nx,
