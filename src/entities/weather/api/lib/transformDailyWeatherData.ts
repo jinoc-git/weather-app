@@ -1,12 +1,13 @@
+import type { CityIdenty } from '@/entities/search';
 import { parseWeatherValue } from '@/entities/weather/api/lib';
-import type { WeatherDataIdenty, WeatherInfo } from '@/entities/weather/model';
+import type { WeatherInfo } from '@/entities/weather/model';
 import type { DailyWeatherData, HourlyWeather } from '@/entities/weather/model';
 import { addDays, format } from 'date-fns';
 
 export const transformDailyWeatherData = (
   now: Date,
   items: WeatherInfo[],
-  identy: WeatherDataIdenty
+  identy: CityIdenty
 ): DailyWeatherData => {
   const grouped = new Map<string, Partial<HourlyWeather>>();
 

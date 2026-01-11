@@ -1,1 +1,1 @@
-export { useGetDailyWeather } from './useGetDaliyWeather';
+export { fetchDatilyWeather } from './fetchDatilyWeather';

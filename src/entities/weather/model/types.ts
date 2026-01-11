@@ -1,3 +1,4 @@
+import type { CityIdenty } from '@/entities/search';
 import type { DistrictCoordinate } from '@/shared';
 
 export type WeatherCategory =
@@ -38,11 +39,6 @@ export type HourlyWeather = {
   reh: number; // REH: 습도 (%)
 };
 
-export type WeatherDataIdenty = {
-  placeName: string;
-  nickname: string | null;
-};
-
 export type DailyWeatherData = {
   items: HourlyWeather[];
   todayMin: number | null;
@@ -52,4 +48,4 @@ export type DailyWeatherData = {
   nowPty: number;
   nowSno: number;
   nowDt: number;
-} & WeatherDataIdenty;
+} & CityIdenty;
