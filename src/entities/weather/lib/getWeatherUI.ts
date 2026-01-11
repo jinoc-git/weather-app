@@ -40,9 +40,9 @@ export const getWeatherUI = (
     case 1:
       return { status: 'clear', text: '맑음' };
     case 3:
-      return { status: 'cloudsun', text: '구름 많음' };
+      return { status: 'cloudsun', text: '흐림' };
     case 4:
-      return { status: 'clouds', text: '흐림' };
+      return { status: 'clouds', text: '구름 많음' };
     default:
       return { status: 'clear', text: '맑음' };
   }

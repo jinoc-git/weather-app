@@ -1,4 +1,4 @@
-import type { CityIdenty } from '@/entities/search';
+import type { CityDto } from '@/entities/search';
 import type { DistrictCoordinate } from '@/shared';
 
 export type WeatherCategory =
@@ -48,4 +48,4 @@ export type DailyWeatherData = {
   nowPty: number;
   nowSno: number;
   nowDt: number;
-} & CityIdenty;
+} & CityDto;

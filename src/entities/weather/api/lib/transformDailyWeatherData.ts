@@ -1,4 +1,4 @@
-import type { CityIdenty } from '@/entities/search';
+import type { CityDto } from '@/entities/search';
 import { parseWeatherValue } from '@/entities/weather/api/lib';
 import type { WeatherInfo } from '@/entities/weather/model';
 import type { DailyWeatherData, HourlyWeather } from '@/entities/weather/model';
@@ -7,7 +7,7 @@ import { addDays, format } from 'date-fns';
 export const transformDailyWeatherData = (
   now: Date,
   items: WeatherInfo[],
-  identy: CityIdenty
+  cityDto: CityDto
 ): DailyWeatherData => {
   const grouped = new Map<string, Partial<HourlyWeather>>();
 
@@ -15,8 +15,8 @@ export const transformDailyWeatherData = (
   const todayStr = format(now, 'yyyyMMdd');
 
   // 최저/최고 기온 임시 저장 변수
-  let minTemp: number | null = null;
-  let maxTemp: number | null = null;
+  let minTemp: number = 0;
+  let maxTemp: number = 0;
 
   // [Step 1] 데이터 순회 및 파싱
   items.forEach((item) => {
@@ -82,7 +82,7 @@ export const transformDailyWeatherData = (
   // 정렬된 리스트에서 현재 시간과 일치하는 데이터를 찾음
   const currentItem = sortedItems.find((item) => item.dt === currentKey);
 
-  const nowTmp = currentItem?.tmp ?? null;
+  const nowTmp = currentItem?.tmp ?? Infinity;
   // 👇 추가된 부분: 현재 날씨 상태(Sky), 강수 형태(Pty), 적설량(Sno) 추출
   const nowSky = currentItem?.sky ?? 1; // 기본값 맑음(1)
   const nowPty = currentItem?.pty ?? 0; // 기본값 없음(0)
@@ -134,6 +134,6 @@ export const transformDailyWeatherData = (
     nowPty,
     nowSno,
     nowDt: currentKey,
-    ...identy,
+    ...cityDto,
   };
 };

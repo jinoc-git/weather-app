@@ -11,7 +11,6 @@ export const HourlyWeather = ({ data }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // 초기값: 왼쪽으로 0만큼만 이동 가능 (이동 불가)
   const [constraints, setConstraints] = useState({ left: 0, right: 0 });
 
   const updateContentDragArea = useEffectEvent((distance: number) => {
@@ -42,14 +41,13 @@ export const HourlyWeather = ({ data }: Props) => {
         className="flex gap-4  pb-4 ">
         {data.items.map((item) => {
           const { status } = getWeatherUI(item.sky, item.pty, item.sno);
-          // const isNow = item.dt === data.nowDt;
           const hour = parseInt(item.time.substring(0, 2), 10);
 
           return (
             <div
               key={`${data.placeName}-${item.dt}`}
-              className={`w-1/3 min-w-[64px] max-w-[150px] flex flex-col items-center gap-3 p-3 rounded-2xl text-white `}>
-              <span className={`text-sm font-medium`}>{hour}시</span>
+              className="w-1/3 min-w-[64px] max-w-[150px] flex flex-col items-center gap-3 p-3 rounded-2xl text-white">
+              <span className="text-sm font-medium">{hour}시</span>
               <WeatherVisual weatherStatus={status} size={30} animate={false} />
               <span className="font-bold">{item.tmp}°</span>
             </div>
