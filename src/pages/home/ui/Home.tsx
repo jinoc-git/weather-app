@@ -21,13 +21,15 @@ export const HomePage = () => {
 
   return (
     <>
-      {/* {isLocLoading && <CardSkeleton />} */}
+      {!myLocation && isLocLoading && <CardSkeleton />}
 
       {result.map(({ data, isLoading }, i) => {
         if (isLoading || !data) return <CardSkeleton key={`loading-${i}`} />;
 
         const displayData = { ...data, nickname: cityList[i].nickname };
-        const isCurrentLocation = myLocation ? i === 0 : false;
+        const isCurrentLocation = myLocation
+          ? myLocation.address === data.address
+          : false;
         return (
           <Card
             key={data.address}

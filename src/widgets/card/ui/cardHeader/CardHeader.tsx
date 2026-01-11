@@ -40,7 +40,7 @@ export const CardHeader = ({
         <p>{displayName}</p>
       </div>
 
-      {!isCurrentLocation && isBookmarked && (
+      {(isCurrentLocation || isBookmarked) && (
         <CardMenu address={data.address} currentNickname={displayName} />
       )}
     </div>

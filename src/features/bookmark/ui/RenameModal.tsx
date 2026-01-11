@@ -39,8 +39,7 @@ export const RenameModal = ({
     <PortalModal
       isOpen={isOpen}
       onClose={onClose}
-      // PortalModal 기본 스타일(전체화면) + 중앙 정렬을 위한 Flex 설정
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+      className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div
         onClick={(e) => e.stopPropagation()}
         className="bg-[#1a1c22] border border-white/10 p-6 rounded-2xl w-full max-w-sm shadow-2xl animate-in zoom-in-95 duration-200">
