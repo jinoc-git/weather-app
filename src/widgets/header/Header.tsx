@@ -2,13 +2,14 @@ import type { CityDto } from '@/entities/search';
 import { SearchModal } from '@/features/search';
 import { useModal } from '@/shared';
 import { Menu, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
+  const navigate = useNavigate();
   const searchModal = useModal();
 
   const handleSelectCity = (cityData: CityDto) => {
-    console.log(cityData);
-    // 상세페이지 이동 추가 예정
+    navigate(`/detail/${cityData.id}`);
     searchModal.close();
   };
 

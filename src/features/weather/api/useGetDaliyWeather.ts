@@ -5,8 +5,8 @@ import { useQueries } from '@tanstack/react-query';
 export const useGetDailyWeather = (coords: UseGetDailyWeatherParams[]) => {
   const now = new Date();
   return useQueries({
-    queries: coords.map(({ nx, ny, placeName, nickname }) => ({
-      queryKey: ['dailyWeather', nx, ny],
+    queries: coords.map(({ id, nx, ny, placeName, nickname }) => ({
+      queryKey: ['dailyWeather', id],
       queryFn: async () => {
         // 1. 현재 시간 기준 설정 (API 호출과 변환 기준점 통일)
         // 2. API 호출 (과거/미래 데이터)
@@ -15,6 +15,7 @@ export const useGetDailyWeather = (coords: UseGetDailyWeatherParams[]) => {
         const allItems = [...pastItems, ...futureItems];
         // 4. 데이터 변환 및 필터링
         return transformDailyWeatherData(now, allItems, {
+          id,
           placeName,
           nickname,
         });

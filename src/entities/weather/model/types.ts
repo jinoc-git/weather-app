@@ -39,6 +39,7 @@ export type HourlyWeather = {
 };
 
 export type WeatherDataIdenty = {
+  id: number;
   placeName: string;
   nickname: string | null;
 };
