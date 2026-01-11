@@ -1,9 +1,7 @@
-import {
-  CardHeaderSkeleton,
-  CardInfoSkeleton,
-  CardLayout,
-  HourlyWeatherSkeleton,
-} from '@/widgets/card/ui';
+import { CardHeaderSkeleton } from '@/widgets/card/ui/cardHeader';
+import { CardInfoSkeleton } from '@/widgets/card/ui/cardInfo';
+import { CardLayout } from '@/widgets/card/ui/cardLayoutComp';
+import { HourlyWeatherSkeleton } from '@/widgets/card/ui/hourlyWeather';
 
 export const CardSkeleton = () => {
   return (

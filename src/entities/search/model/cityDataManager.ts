@@ -1,12 +1,10 @@
-import { mapCityRdoToDto } from '@/entities/search/lib';
 import { normalizeString } from '@/shared';
-import type { CityDto } from '@/entities/search';
 import type { CityRdo } from '@/entities/search/rdo';
 import { RAW_CITY_DATA } from '@/entities/search/model';
 
 const initializeCityData = () => {
   // 위치 조회용 Map (Key: "nx:ny", Value: CityDto)
-  const gridCityMap = new Map<string, CityDto>();
+  const gridCityMap = new Map<string, CityRdo>();
   // 행정구역 코드 조회용 Map (Key: cityId, Value: CityRdo[])
   const cityIdMap = new Map<number, CityRdo[]>();
   // 검색 UI용 정규화된 키 리스트
@@ -22,7 +20,7 @@ const initializeCityData = () => {
     for (const city of cities) {
       const gridKey = `${city.nx}:${city.ny}`;
       if (!gridCityMap.has(gridKey)) {
-        gridCityMap.set(gridKey, mapCityRdoToDto(city));
+        gridCityMap.set(gridKey, city);
       }
 
       const existingList = cityIdMap.get(city.id);

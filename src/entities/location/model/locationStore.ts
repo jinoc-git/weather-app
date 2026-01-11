@@ -35,7 +35,7 @@ export const useLocationStore = create<LocationState>((set) => ({
           set({
             myLocation: {
               ...matchedCity,
-              nickname: '나의 위치',
+              // nickname: '나의 위치',
             },
             isLoading: false,
           });

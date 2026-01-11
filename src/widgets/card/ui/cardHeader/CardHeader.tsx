@@ -1,6 +1,6 @@
 import type { DailyWeatherData } from '@/entities/weather';
 import { CardMenu } from '@/features/bookmark';
-import { LocateFixed, MapPin, Star } from 'lucide-react';
+import { MapPin, Star } from 'lucide-react';
 
 type Props = {
   data: DailyWeatherData;
@@ -36,11 +36,7 @@ export const CardHeader = ({
       )}
 
       <div className="flex gap-2 items-center font-bold text-xl">
-        {isCurrentLocation ? (
-          <LocateFixed size={24} className="shrink-0 text-white " />
-        ) : (
-          <MapPin size={24} className="shrink-0" />
-        )}
+        <MapPin size={24} className="shrink-0" />
         <p>{displayName}</p>
       </div>
 
