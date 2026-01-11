@@ -1,25 +1,35 @@
+import { useBookmarkStore } from '@/entities/bookmark';
 import type { CityDto } from '@/entities/search';
 import { SearchResultItem } from '@/features/search/ui/SearchResultItem';
 import { Search } from 'lucide-react';
 
 type Props = {
   results: CityDto[];
-  hasQuery: boolean; // 검색어가 입력되었는지 여부
+  hasQuery: boolean;
   onSelect: (cityData: CityDto) => void;
 };
 
 export const SearchResults = ({ results, hasQuery, onSelect }: Props) => {
+  const bookmarks = useBookmarkStore((state) => state.bookmarks);
+
   // 검색 결과가 있을 때
   if (results.length > 0) {
     return (
       <ul className="flex flex-col pb-10">
-        {results.map((data) => (
-          <SearchResultItem
-            key={`search-${data.id}`}
-            city={data}
-            onClick={() => onSelect(data)}
-          />
-        ))}
+        {results.map((data) => {
+          const isBookmarked = bookmarks.some(
+            (b) => b.address === data.address
+          );
+
+          return (
+            <SearchResultItem
+              key={`search-${data.id}`}
+              city={data}
+              isBookmarked={isBookmarked}
+              onClick={() => onSelect(data)}
+            />
+          );
+        })}
       </ul>
     );
   }
