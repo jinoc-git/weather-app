@@ -19,6 +19,7 @@ const defaultVariants: Variants = {
 export const PortalModal = ({
   children,
   isOpen,
+  onClose,
   className = 'fixed inset-0 z-9999 bg-[#1a1c22] text-white w-screen h-screen overscroll-none',
 }: Props) => {
   const [mounted, setMounted] = useState(false);
@@ -30,6 +31,24 @@ export const PortalModal = ({
   useEffect(() => {
     setMount();
   }, []);
+
+  useEffect(() => {
+    if (!isOpen || !onClose) return;
+
+    window.history.pushState({ modalOpen: true }, '');
+    const handlePopState = () => {
+      onClose();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+
+      if (window.history.state?.modalOpen) {
+        window.history.back();
+      }
+    };
+  }, [isOpen, onClose]);
 
   useScrollLock(isOpen);
 

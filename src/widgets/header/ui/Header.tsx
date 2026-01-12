@@ -56,13 +56,15 @@ export const Header = () => {
   return (
     <>
       <header className="w-full flex justify-between items-center relative z-10">
-        <div className="flex items-center relative z-10">
+        <div className="flex items-center gap-4 relative z-10">
           <button
             onClick={() => navigate('/')}
             className="p-2 -ml-2 rounded-full transition text-white hover:bg-white/20 cursor-pointer"
             aria-label="홈으로 이동">
             <Home size={24} />
           </button>
+
+          <div className=" hidden md:block">{renderLocationUI()}</div>
         </div>
 
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 md:hidden">

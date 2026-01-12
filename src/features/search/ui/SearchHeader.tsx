@@ -13,7 +13,7 @@ export const SearchHeader = ({ value, onChange, onClear, onClose }: Props) => {
       {/* 뒤로가기 */}
       <button
         onClick={onClose}
-        className="p-2 -ml-1 text-gray-300 active:text-white active:bg-white/10 rounded-full transition-colors">
+        className="p-2 -ml-1 text-gray-300 active:text-white active:bg-white/10 rounded-full transition-colors cursor-pointer">
         <ChevronLeft className="w-7 h-7" />
       </button>
 
