@@ -72,7 +72,8 @@ export const WeatherVisual = ({
       className={cn(
         'relative w-full flex items-center justify-center shrink-0',
         className
-      )}>
+      )}
+      style={{ height: size }}>
       {background ? (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
@@ -90,7 +91,7 @@ export const WeatherVisual = ({
         <Icon
           size={size}
           className={`${iconColor} transition-all duration-500`}
-          strokeWidth={size > 60 ? 1.5 : undefined}
+          strokeWidth={size > 60 ? 1.5 : 2}
         />
       </div>
     </div>

@@ -15,7 +15,7 @@ export const CardLayout = ({
   return (
     <div
       className={cn(
-        'relative w-full max-w-[calc(100vw-32px)] md:max-w-[400px] h-full max-h-[700px]',
+        'relative w-full max-w-[calc(100vw-32px)] md:max-w-[400px] h-[632px]',
         'rounded-[40px] shadow-2xl transition-all duration-300',
         isSkeleton && 'animate-pulse',
         className

@@ -36,13 +36,16 @@ export const HomePage = () => {
     <>
       {!myLocation && isLocLoading && <CardSkeleton />}
 
-      {result.map(({ data, isLoading }, i) => {
-        if (isLoading || !data) return <CardSkeleton key={`loading-${i}`} />;
+      {cityList.map((city, i) => {
+        const queryResult = result[i];
 
-        const displayData = { ...data, nickname: cityList[i].nickname };
-        const isCurrentLocation = myLocation
-          ? myLocation.address === data.address
-          : false;
+        if (!queryResult || queryResult.isLoading || !queryResult.data) {
+          return <CardSkeleton key={`skeleton-${city.address || i}`} />;
+        }
+
+        const { data } = queryResult;
+        const displayData = { ...data, nickname: city.nickname };
+        const isCurrentLocation = myLocation?.address === data.address;
         return (
           <Card
             key={data.address}

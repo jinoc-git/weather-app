@@ -8,7 +8,7 @@ type Props = {
 export const CardInfo = ({ text, nowTmp, todayMax, todayMin }: Props) => {
   return (
     <>
-      <h3 className="text-8xl font-bold text-white mt-4 tracking-tighter">
+      <h3 className="text-8xl font-bold text-white mt-4 leading-none tracking-tighter">
         {nowTmp}°
       </h3>
       <p className="text-xl font-medium text-white mt-2">{text}</p>

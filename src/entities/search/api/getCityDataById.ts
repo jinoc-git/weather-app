@@ -8,7 +8,7 @@ export const getCityDataById = (
 ): CityDto | null => {
   if (!cityId || !addr) return null;
 
-  const data = cityIdMap.get(Number(cityId));
+  const data = cityIdMap[cityId];
   if (!data) return null;
 
   const targetCity = data.find((city) => {

@@ -6,7 +6,7 @@ export const getCityDataByGrid = (
   nx: number,
   ny: number
 ): CityDto | undefined => {
-  const city = gridCityMap.get(`${nx}:${ny}`);
+  const city = gridCityMap[`${nx}:${ny}`];
   if (!city) return undefined;
   return mapCityRdoToDto(city);
 };
