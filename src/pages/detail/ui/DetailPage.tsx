@@ -16,5 +16,5 @@ export const DetailPage = () => {
   if (isPending) return <CardSkeleton />;
   if (!data) return <div>도시 정보가 없습니다</div>;
 
-  return <Card data={data} />;
+  return <Card data={data} preventNavigation />;
 };

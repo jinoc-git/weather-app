@@ -19,8 +19,8 @@ type WeatherStyle = {
 
 const weatherStyles: Record<WeatherStatus, WeatherStyle> = {
   clear: {
-    blob1: 'bg-yellow-300',
-    blob2: 'bg-orange-400',
+    blob1: 'bg-yellow-100',
+    blob2: 'bg-orange-200',
     Icon: Sun,
     iconColor: 'text-white',
   },
@@ -31,8 +31,8 @@ const weatherStyles: Record<WeatherStatus, WeatherStyle> = {
     iconColor: 'text-gray-100',
   },
   clouds: {
-    blob1: 'bg-purple-300',
-    blob2: 'bg-yellow-300',
+    blob1: 'bg-gray-400',
+    blob2: 'bg-purple-400',
     Icon: Cloud,
     iconColor: 'text-gray-100',
   },
@@ -76,13 +76,13 @@ export const WeatherVisual = ({
       {background ? (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
-            className={`absolute -top-4 -left-4 w-32 h-32 md:w-40 md:h-40 ${blob1} rounded-full mix-blend-overlay filter blur-3xl opacity-60 ${
-              animate ? 'animate-blob' : ''
-            } `}></div>
+            className={`absolute -top-4 -left-4 w-32 h-32 md:w-40 md:h-40 ${blob1} rounded-full filter blur-[50px] opacity-40 
+            ${animate ? 'animate-blob' : ''} `}
+          />
           <div
-            className={`absolute top-4 -right-4 w-32 h-32 md:w-40 md:h-40 ${blob2} rounded-full mix-blend-overlay filter blur-3xl opacity-60 ${
-              animate ? 'animate-blob animation-delay-2000' : ''
-            }`}></div>
+            className={`absolute top-4 -right-4 w-32 h-32 md:w-40 md:h-40 ${blob2} rounded-full filter blur-[50px] opacity-40 
+            ${animate ? 'animate-blob animation-delay-2000' : ''}`}
+          />
         </div>
       ) : null}
 

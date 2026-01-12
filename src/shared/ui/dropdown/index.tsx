@@ -1,5 +1,5 @@
-import { cn } from '@/shared';
-import {
+import { cn, stopPropagation } from '@/shared';
+import React, {
   useState,
   useRef,
   useEffect,
@@ -7,6 +7,8 @@ import {
   useContext,
   type ReactNode,
   useEffectEvent,
+  isValidElement,
+  cloneElement,
 } from 'react';
 
 type DropdownContextType = {
@@ -61,23 +63,54 @@ export const Dropdown = ({
   );
 };
 
-const Trigger = ({
-  children,
-  className = '',
-}: {
-  children: ReactNode;
+type Props = {
+  children: React.ReactElement;
   className?: string;
-}) => {
+  asChild?: boolean;
+};
+
+const Trigger = ({ children, className = '', asChild }: Props) => {
   const context = useContext(DropdownContext);
-  if (!context)
-    throw new Error('드롭다운 트리거는 드롭다운 안에서 사용해야 합니다');
+  if (!context) throw new Error('Trigger must be used within Dropdown');
+
+  if (asChild && isValidElement(children)) {
+    const child = children as React.ReactElement<
+      React.HTMLAttributes<HTMLElement>
+    >;
+
+    const handleToggle = (e: React.MouseEvent<HTMLElement>) => {
+      stopPropagation(e);
+      child.props.onClick?.(e);
+      context.toggle();
+    };
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLElement>) => {
+      stopPropagation(e);
+      child.props.onMouseDown?.(e);
+    };
+
+    const handleTouchStart = (e: React.TouchEvent<HTMLElement>) => {
+      stopPropagation(e);
+      child.props.onTouchStart?.(e);
+    };
+
+    return cloneElement(child, {
+      ...child.props,
+      onClick: handleToggle,
+      onMouseDown: handleMouseDown,
+      onTouchStart: handleTouchStart,
+      className: cn(child.props.className, className),
+    });
+  }
 
   return (
     <div
       onClick={(e) => {
-        e.stopPropagation();
+        stopPropagation(e);
         context.toggle();
       }}
+      onMouseDown={stopPropagation}
+      onTouchStart={stopPropagation}
       className={className}>
       {children}
     </div>
