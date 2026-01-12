@@ -15,8 +15,9 @@ export const useBookmarkAction = (place: PlaceData) => {
       removeBookmark(place.address);
       toast.error(`즐겨찾기에 ${place.placeName}이 제거되었어요`);
     } else {
-      addBookmark(place);
-      toast.success(`즐겨찾기에 ${place.placeName}이 추가되었어요`);
+      if (addBookmark(place)) {
+        toast.success(`즐겨찾기에 ${place.placeName}이 추가되었어요`);
+      }
     }
   };
 
