@@ -1,12 +1,13 @@
 import type { DailyWeatherData } from '@/entities/weather';
 import { CardMenu } from '@/features/bookmark';
+import { stopPropagation } from '@/shared';
 import { MapPin, Star } from 'lucide-react';
 
 type Props = {
   data: DailyWeatherData;
   isCurrentLocation?: boolean;
   isBookmarked: boolean;
-  onToggleBookmark: () => void;
+  onToggleBookmark: (e: React.MouseEvent | React.TouchEvent) => void;
 };
 
 export const CardHeader = ({
@@ -20,10 +21,9 @@ export const CardHeader = ({
     <div className="relative w-full h-16 p-4 flex items-center text-white justify-center">
       {isCurrentLocation ? null : (
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleBookmark();
-          }}
+          onClick={onToggleBookmark}
+          onMouseDown={stopPropagation}
+          onTouchStart={stopPropagation}
           className="absolute top-4 left-4 p-1.5 rounded-full hover:bg-white/10 transition active:scale-90 cursor-pointer">
           <Star
             size={24}
