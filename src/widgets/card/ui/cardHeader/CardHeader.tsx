@@ -1,0 +1,53 @@
+import type { DailyWeatherData } from '@/entities/weather';
+import { CardMenu } from '@/features/bookmark';
+import { stopPropagation } from '@/shared';
+import { MapPin, Star } from 'lucide-react';
+
+type Props = {
+  data: DailyWeatherData;
+  isCurrentLocation?: boolean;
+  isBookmarked: boolean;
+  onToggleBookmark: (e: React.MouseEvent | React.TouchEvent) => void;
+};
+
+export const CardHeader = ({
+  data,
+  isCurrentLocation,
+  isBookmarked,
+  onToggleBookmark,
+}: Props) => {
+  const displayName = data.nickname ?? data.placeName;
+  return (
+    <div className=" w-full">
+      <div className="relative h-16 p-4 pb-0 flex items-center text-white justify-center">
+        {isCurrentLocation ? null : (
+          <button
+            onClick={onToggleBookmark}
+            onMouseDown={stopPropagation}
+            onTouchStart={stopPropagation}
+            className="absolute top-6 left-4 p-1.5 rounded-full hover:bg-white/10 transition active:scale-90 cursor-pointer">
+            <Star
+              size={24}
+              strokeWidth={2}
+              color={isBookmarked ? '#Facc15' : 'white'}
+              fill={isBookmarked ? '#Facc15' : 'none'}
+              className="transition-colors duration-300"
+            />
+          </button>
+        )}
+
+        <div className="flex gap-2 items-center font-bold text-xl">
+          <MapPin size={24} className="shrink-0" />
+          <p>{displayName}</p>
+        </div>
+
+        {(isCurrentLocation || isBookmarked) && (
+          <CardMenu address={data.address} currentNickname={displayName} />
+        )}
+      </div>
+      <div className="flex justify-center">
+        <span className="text-cyan-100">{data.address}</span>
+      </div>
+    </div>
+  );
+};
