@@ -9,7 +9,7 @@ type Props = {
 export const MainLayout = ({ children }: Props) => {
   return (
     <>
-      <div className="fixed inset-0 w-full h-full bg-gradient-base! -z-50 " />
+      <div className="fixed inset-0 w-full h-full bg-gradient-base -z-50 " />
       <main className="relative h-screen w-full p-4 overflow-hidden flex flex-col">
         <div className="w-full pb-4 md:pt-4 md:px-4 shrink-0">
           <Header />

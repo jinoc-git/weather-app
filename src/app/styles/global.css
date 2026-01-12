@@ -1,7 +1,4 @@
 @import 'tailwindcss';
-:root {
-  color-scheme: light only;
-}
 
 @theme {
   --animate-blob: blob 3s ease-in-out infinite;

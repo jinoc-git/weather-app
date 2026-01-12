@@ -55,6 +55,10 @@ pnpm build
 
 ## 🛠 3. 기술적 의사 결정 및 이유
 
+### Vite PWA (Progressive Web App) 도입
+
+- **결정 이유**: 네이티브 앱과 유사한 사용자 경험을 제공하고, 서비스 접근성을 보장하기 위해 도입했습니다.
+
 ### Feature-Sliced Design (FSD) 아키텍처
 
 - **결정 이유**: 프로젝트 규모 확장에 따른 유지보수 어려움을 해결하기 위해 레이어별 역할 분리가 명확한 FSD를 채택했습니다.
@@ -85,3 +89,5 @@ pnpm build
 - **Styling**: Tailwind CSS
 - **Animation**: Framer Motion
 - **Icons**: Lucide React
+- **PWA**: Vite-plugin-PWA
+- **Data Processing**: Python (Data Pre-processing)
