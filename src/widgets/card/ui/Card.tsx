@@ -49,7 +49,7 @@ export const Card = ({
     <div
       onClick={handleCardClick}
       className={cn(
-        'transition-transform duration-200',
+        'transition-transform duration-200 h-[632px]',
         preventNavigation
           ? 'cursor-default'
           : [

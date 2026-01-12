@@ -3,7 +3,6 @@ export type {
   WeatherInfo,
   HourlyWeather,
   DailyWeatherData,
-  WeatherDataIdenty,
 } from './model';
 
 export { getDailyWeather, transformDailyWeatherData } from './api';
