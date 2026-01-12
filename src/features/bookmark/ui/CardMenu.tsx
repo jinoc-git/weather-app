@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MoreVertical, Edit2 } from 'lucide-react';
-import { Dropdown } from '@/shared/ui';
+import { Dropdown } from '@/shared';
 import { RenameModal } from './RenameModal';
 import { useBookmarkStore } from '@/entities/bookmark';
 import toast from 'react-hot-toast';

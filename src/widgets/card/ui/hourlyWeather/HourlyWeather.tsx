@@ -1,5 +1,5 @@
 import { getWeatherUI, type DailyWeatherData } from '@/entities/weather';
-import { WeatherVisual } from '@/shared/ui';
+import { WeatherVisual } from '@/shared';
 import { motion } from 'motion/react';
 import { useEffectEvent, useLayoutEffect, useRef, useState } from 'react';
 

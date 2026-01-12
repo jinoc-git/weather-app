@@ -1,4 +1,4 @@
-import { WeatherVisual } from '@/shared/ui';
+import { WeatherVisual } from '@/shared';
 import { getWeatherUI, type DailyWeatherData } from '@/entities/weather';
 import { useBookmarkAction } from '@/features/bookmark';
 import { CardLayout } from '@/widgets/card/ui/cardLayoutComp';
