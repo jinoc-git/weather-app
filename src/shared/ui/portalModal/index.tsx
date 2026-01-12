@@ -35,7 +35,10 @@ export const PortalModal = ({
   useEffect(() => {
     if (!isOpen || !onClose) return;
 
-    window.history.pushState({ modalOpen: true }, '');
+    if (window.history.state?.modalOpen !== true) {
+      window.history.pushState({ modalOpen: true }, '');
+    }
+
     const handlePopState = () => {
       onClose();
     };
