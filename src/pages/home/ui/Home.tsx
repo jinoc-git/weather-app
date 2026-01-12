@@ -2,7 +2,8 @@ import { useBookmarkStore } from '@/entities/bookmark';
 import { useLocationStore } from '@/entities/location';
 import { useGetDaliyWeatherList } from '@/features/weather/model';
 import { Card, CardSkeleton } from '@/widgets/card';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import toast from 'react-hot-toast';
 
 export const HomePage = () => {
   const bookmarks = useBookmarkStore((state) => state.bookmarks);
@@ -18,6 +19,18 @@ export const HomePage = () => {
   }, [myLocation, bookmarks]);
 
   const result = useGetDaliyWeatherList(cityList);
+
+  const hasWeatherError = result.some((query) => query.isError);
+
+  useEffect(() => {
+    if (hasWeatherError) {
+      toast.error('일부 지역의 날씨 정보를 불러오지 못했습니다.', {
+        id: 'weather-fetch-error',
+        duration: 3000,
+        icon: '☁️',
+      });
+    }
+  }, [hasWeatherError]);
 
   return (
     <>
