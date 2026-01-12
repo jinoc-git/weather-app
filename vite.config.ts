@@ -21,8 +21,7 @@ export default defineConfig({
         name: 'Weather App',
         short_name: 'Weather',
         description: '실시간 날씨 정보를 제공하는 앱',
-        theme_color: '#51a2ff',
-        background_color: '#51a2ff',
+        theme_color: '#ffffff',
         display: 'standalone',
         icons: [
           {
