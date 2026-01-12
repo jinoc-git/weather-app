@@ -10,7 +10,7 @@ export const MainLayout = ({ children }: Props) => {
     <>
       <div className="fixed inset-0 w-full h-full bg-gradient-base -z-50 " />
       <main className="relative h-screen w-full p-4 overflow-hidden flex flex-col">
-        <div className="w-full p-4 shrink-0">
+        <div className="w-full pb-4 md:pt-4 md:px-4 shrink-0">
           <Header />
         </div>
         <div className="flex-1 w-full overflow-y-auto custom-scrollbar-light px-4 pb-10">

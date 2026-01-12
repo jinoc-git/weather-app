@@ -9,4 +9,11 @@ export {
   stopPropagation,
 } from './lib';
 export { useModal } from './model';
-export { PortalModal, MenuToggle, Dropdown, WeatherVisual } from './ui';
+export {
+  PortalModal,
+  MenuToggle,
+  Dropdown,
+  WeatherVisual,
+  LocationBadge,
+  LocationBadgeSkeleton,
+} from './ui';

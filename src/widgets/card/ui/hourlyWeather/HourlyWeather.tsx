@@ -30,7 +30,7 @@ export const HourlyWeather = ({ data }: Props) => {
   return (
     <div
       ref={wrapperRef}
-      className=" p-6 pb-10 overflow-x-auto no-scrollbar w-full ">
+      className="p-6 pb-10 overflow-x-auto no-scrollbar w-full block min-w-0">
       <motion.div
         ref={contentRef}
         drag="x"
