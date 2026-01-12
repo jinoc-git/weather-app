@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# PWA Development files
+dev-dist
+dist
+*.log
