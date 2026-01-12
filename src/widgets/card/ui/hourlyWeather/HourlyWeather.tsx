@@ -50,8 +50,10 @@ export const HourlyWeather = ({ data }: Props) => {
           return (
             <div
               key={`${data.placeName}-${item.dt}`}
-              className="w-1/3 min-w-[64px] max-w-[150px] flex flex-col items-center gap-3 p-3 rounded-2xl text-white">
-              <span className="text-sm font-medium">{hour}시</span>
+              className="w-1/3 min-w-[90px] max-w-[170px] flex flex-col items-center gap-3 p-3 rounded-2xl text-white">
+              <span className="text-sm font-medium">
+                {hour < 12 ? '오전' : '오후'} {hour % 12 || 12}시
+              </span>
               <WeatherVisual weatherStatus={status} size={30} animate={false} />
               <span className="font-bold">{item.tmp}°</span>
             </div>

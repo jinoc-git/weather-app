@@ -34,7 +34,7 @@ export const SearchModal = ({ isOpen, close }: Props) => {
   if (!isOpen) return null;
 
   return (
-    <PortalModal isOpen={isOpen}>
+    <PortalModal isOpen={isOpen} onClose={handleClose}>
       <SearchHeader
         value={inputValue}
         onChange={setInputValue}
