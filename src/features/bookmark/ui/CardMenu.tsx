@@ -3,6 +3,7 @@ import { MoreVertical, Edit2 } from 'lucide-react';
 import { Dropdown } from '@/shared/ui';
 import { RenameModal } from './RenameModal';
 import { useBookmarkStore } from '@/entities/bookmark';
+import toast from 'react-hot-toast';
 
 type Props = {
   address: string;
@@ -17,6 +18,7 @@ export const CardMenu = ({ address, currentNickname }: Props) => {
   const handleSaveNickname = (newNickname: string) => {
     updateNickname(address, newNickname);
     setIsModalOpen(false);
+    toast.success(`${currentNickname}이 ${newNickname}로 변경되었어요`);
   };
 
   return (

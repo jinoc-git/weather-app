@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDebounce } from '@/shared/lib/useDebounce';
+import { useDebounce } from '@/shared/lib/hooks/useDebounce';
 import { useCitySearch } from '@/features/search/model';
 import { SearchHeader } from './SearchHeader';
 import { SearchResults } from '@/features/search/ui/SearchResults';

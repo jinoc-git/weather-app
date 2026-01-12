@@ -8,16 +8,21 @@ import {
 } from '@/widgets/header/ui/locationBadge';
 import { Menu, Search } from 'lucide-react';
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const navigate = useNavigate();
   const searchModal = useModal();
-  const { myLocation, isLoading, fetchMyLocation } = useLocationStore();
+  const { myLocation, isLoading, error, fetchMyLocation } = useLocationStore();
 
   useEffect(() => {
     fetchMyLocation();
   }, [fetchMyLocation]);
+
+  useEffect(() => {
+    if (error) toast.error(error, { id: 'location-error' });
+  }, [error]);
 
   const handleSelectCity = (cityData: CityDto) => {
     const encodeAddr = encodeURIComponent(cityData.address);
@@ -39,6 +44,7 @@ export const Header = () => {
       <LocationBadge
         placeName={myLocation?.placeName ?? ''}
         isLoading={isLoading}
+        isError={!!error}
         onRefresh={handleRefreshLocation}
         className={className}
       />

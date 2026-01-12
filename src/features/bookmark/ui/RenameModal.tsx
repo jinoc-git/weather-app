@@ -1,5 +1,6 @@
-import { useState, useEffect, useEffectEvent } from 'react';
+import { useEffect } from 'react';
 import { PortalModal } from '@/shared/ui';
+import { useUncontrolledInput } from '@/shared';
 
 type Props = {
   isOpen: boolean;
@@ -14,17 +15,14 @@ export const RenameModal = ({
   initialValue,
   onSave,
 }: Props) => {
-  const [value, setValue] = useState(initialValue);
-
-  const syncInitValue = useEffectEvent(() => {
-    setValue(initialValue);
-  });
+  const { ref, getValue, focus } = useUncontrolledInput(initialValue);
 
   useEffect(() => {
-    if (isOpen) syncInitValue();
-  }, [isOpen, initialValue]);
+    if (isOpen) focus();
+  }, [isOpen, focus]);
 
   const handleSave = () => {
+    const value = getValue();
     if (value.trim()) {
       onSave(value);
       onClose();
@@ -46,10 +44,10 @@ export const RenameModal = ({
         <h3 className="text-lg font-bold text-white mb-4">지명 변경</h3>
 
         <input
-          autoFocus
           type="text"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          autoFocus
+          ref={ref}
+          defaultValue={initialValue}
           onKeyDown={handleKeyDown}
           className="w-full bg-[#2c2f38] text-white px-4 py-3 rounded-xl outline-none border border-white/10 focus:border-white/40 mb-6"
           placeholder="새로운 이름을 입력하세요"
@@ -58,12 +56,12 @@ export const RenameModal = ({
         <div className="flex gap-3 justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-gray-400 hover:bg-white/5 rounded-lg transition">
+            className="px-4 py-2 text-gray-400 hover:bg-white/5 rounded-lg transition cursor-pointer">
             취소
           </button>
           <button
             onClick={handleSave}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition">
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition cursor-pointer">
             저장
           </button>
         </div>
