@@ -55,6 +55,7 @@ export const Card = ({
           : [
               'cursor-pointer active:scale-[0.97]',
               'has-[button:active]:scale-100',
+              'has-[.prevent-scale:active]:scale-100',
             ]
       )}>
       <CardLayout>
@@ -77,7 +78,9 @@ export const Card = ({
         <div
           onClick={stopPropagation}
           onTouchStart={stopPropagation}
-          className="cursor-auto">
+          onMouseDown={stopPropagation}
+          onPointerDown={stopPropagation}
+          className="prevent-scale cursor-grab">
           <HourlyWeather data={data} />
         </div>
       </CardLayout>

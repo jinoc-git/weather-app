@@ -25,7 +25,7 @@ export const CardMenu = ({ address, currentNickname }: Props) => {
     <>
       <Dropdown className="absolute top-4 right-4">
         <Dropdown.Trigger asChild>
-          <button className="p-1.5 rounded-full hover:bg-white/10 text-white/50 hover:text-white transition-colors outline-none focus:bg-white/10">
+          <button className="p-1.5 rounded-full hover:bg-white/10 text-white/50 hover:text-white transition-colors outline-none focus:bg-white/10 cursor-pointer">
             <MoreVertical size={20} />
           </button>
         </Dropdown.Trigger>

@@ -36,9 +36,13 @@ export const HourlyWeather = ({ data }: Props) => {
         drag="x"
         dragConstraints={constraints}
         dragElastic={0.2}
-        whileDrag="dragging"
-        whileTap={{ cursor: 'grabbing' }}
-        className="flex gap-4  pb-4 ">
+        whileDrag={{
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          cursor: 'grab',
+          scale: 0.99,
+        }}
+        transition={{ duration: 0.2 }}
+        className="flex gap-4 p-2 rounded-2xl w-max">
         {data.items.map((item) => {
           const { status } = getWeatherUI(item.sky, item.pty, item.sno);
           const hour = parseInt(item.time.substring(0, 2), 10);
