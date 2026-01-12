@@ -14,14 +14,14 @@ type Props = {
 };
 
 const sidebarVariants: Variants = {
-  closed: { x: '-100%', opacity: 0 },
+  closed: { x: '100%', opacity: 0 },
   open: {
     x: 0,
     opacity: 1,
     transition: { type: 'spring', stiffness: 300, damping: 30 },
   },
   exit: {
-    x: '-100%',
+    x: '100%',
     opacity: 0,
     transition: { duration: 0.2, ease: 'easeInOut' },
   },
@@ -56,11 +56,11 @@ export const Sidebar = ({
             animate="open"
             exit="exit"
             variants={sidebarVariants}
-            className="fixed inset-y-0 left-0 z-50 w-full md:w-[320px] bg-[#1a1c22] shadow-2xl border-r border-white/10 flex flex-col">
-            <div className="w-full flex items-center py-4 md:py-8 pl-4 md:pl-8 pb-4 relative shrink-0">
-              <div className="flex items-center gap-3">
-                <MenuToggle isOpen={true} onClick={onClose} className="-ml-2" />
+            className="fixed inset-y-0 right-0 z-50 w-full md:w-[320px] bg-[#1a1c22] shadow-2xl border-l border-white/10 flex flex-col">
+            <div className="w-full flex items-center py-4 pl-4 md:py-8 pr-2 md:pr-6 pb-4 relative shrink-0">
+              <div className="flex items-center justify-between gap-3 w-full">
                 {locationUI}
+                <MenuToggle isOpen={true} onClick={onClose} className="-ml-2" />
               </div>
             </div>
 

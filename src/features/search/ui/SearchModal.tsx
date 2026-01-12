@@ -4,15 +4,16 @@ import { useCitySearch } from '@/features/search/model';
 import { SearchHeader } from './SearchHeader';
 import { SearchResults } from '@/features/search/ui/SearchResults';
 import { PortalModal } from '@/shared';
-import type { CityDto } from '@/entities/search';
+import { type CityDto } from '@/entities/search';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   isOpen: boolean;
-  onClose: () => void;
-  onSelect: (cityData: CityDto) => void;
+  close: () => void;
 };
 
-export const SearchModal = ({ isOpen, onClose, onSelect }: Props) => {
+export const SearchModal = ({ isOpen, close }: Props) => {
+  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState('');
 
   const debouncedKeyword = useDebounce(inputValue, 300);
@@ -20,13 +21,17 @@ export const SearchModal = ({ isOpen, onClose, onSelect }: Props) => {
 
   const handleClose = () => {
     setInputValue('');
-    onClose();
+    close();
   };
 
-  const handleSelect = (cityData: CityDto) => {
-    onSelect(cityData);
-    handleClose();
+  const handleSelectCity = (cityData: CityDto) => {
+    const encodeAddr = encodeURIComponent(cityData.address);
+    setInputValue('');
+    navigate(`/detail/${cityData.id}?addr=${encodeAddr}`);
+    close();
   };
+
+  if (!isOpen) return null;
 
   return (
     <PortalModal isOpen={isOpen}>
@@ -41,7 +46,7 @@ export const SearchModal = ({ isOpen, onClose, onSelect }: Props) => {
         <SearchResults
           results={results}
           hasQuery={!!inputValue}
-          onSelect={handleSelect}
+          onSelect={handleSelectCity}
         />
       </div>
     </PortalModal>
