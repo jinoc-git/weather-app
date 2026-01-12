@@ -6,3 +6,4 @@ export {
   getCityDataById,
   getCityDataByGrid,
 } from './api';
+export { useSearchModal } from './model';

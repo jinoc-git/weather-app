@@ -1,4 +1,5 @@
 import { Header } from '@/widgets/header';
+import { SearchFloatingButton } from '@/widgets/searchFloatingButton';
 import { type ReactNode } from 'react';
 
 type Props = {
@@ -18,6 +19,8 @@ export const MainLayout = ({ children }: Props) => {
             {children}
           </div>
         </div>
+
+        <SearchFloatingButton />
       </main>
     </>
   );
