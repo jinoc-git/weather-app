@@ -1,7 +1,7 @@
 import { useEffect, useEffectEvent, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, type Variants } from 'motion/react';
-import { useScrollLock } from '@/shared/lib';
+import { cn, useScrollLock } from '@/shared/lib';
 
 type Props = {
   children: ReactNode;
@@ -20,7 +20,10 @@ export const PortalModal = ({
   children,
   isOpen,
   onClose,
-  className = 'fixed inset-0 z-9999 bg-[#1a1c22] text-white w-screen h-screen overscroll-none',
+  className = cn(
+    'fixed inset-0 z-50 w-screen h-screen overscroll-none flex flex-col',
+    'bg-[#1a1c22] text-white'
+  ),
 }: Props) => {
   const [mounted, setMounted] = useState(false);
 
