@@ -17,3 +17,4 @@ export {
   LocationBadge,
   LocationBadgeSkeleton,
 } from './ui';
+export { getWeatherApi } from './api';
