@@ -20,17 +20,24 @@ git clone [repository-url]
 pnpm install
 ```
 
-### 로컬 서버 실행
-
-```bash
-pnpm dev
-```
-
 ### 프로젝트 빌드
 
 ```bash
-pnpm build
+pnpm run build
 ```
+
+### 프리뷰 모드 실행
+
+```bash
+pnpm run preview
+```
+
+### 로컬 서버 실행
+
+```bash
+pnpm run dev
+```
+
 
 ## ✨ 2. 주요 구현 기능
 
