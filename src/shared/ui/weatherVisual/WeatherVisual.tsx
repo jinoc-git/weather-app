@@ -19,32 +19,32 @@ type WeatherStyle = {
 
 const weatherStyles: Record<WeatherStatus, WeatherStyle> = {
   clear: {
-    blob1: 'bg-yellow-100',
-    blob2: 'bg-orange-200',
+    blob1: 'bg-yellow-100 dark:bg-amber-500/30',
+    blob2: 'bg-orange-200 dark:bg-orange-500/30',
     Icon: Sun,
     iconColor: 'text-white',
   },
   cloudsun: {
-    blob1: 'bg-purple-300',
-    blob2: 'bg-yellow-300',
+    blob1: 'bg-purple-300 dark:bg-indigo-500/30',
+    blob2: 'bg-yellow-300 dark:bg-yellow-500/20',
     Icon: CloudSun,
-    iconColor: 'text-gray-100',
+    iconColor: 'text-white',
   },
   clouds: {
-    blob1: 'bg-gray-400',
-    blob2: 'bg-purple-400',
+    blob1: 'bg-gray-400 dark:bg-slate-500/30',
+    blob2: 'bg-purple-400 dark:bg-purple-900/40',
     Icon: Cloud,
-    iconColor: 'text-gray-100',
+    iconColor: 'text-white',
   },
   rain: {
-    blob1: 'bg-blue-500',
-    blob2: 'bg-cyan-300',
+    blob1: 'bg-blue-500 dark:bg-blue-600/40',
+    blob2: 'bg-cyan-300 dark:bg-cyan-700/30',
     Icon: CloudRain,
     iconColor: 'text-white',
   },
   snow: {
-    blob1: 'bg-white',
-    blob2: 'bg-blue-200',
+    blob1: 'bg-white dark:bg-white/20',
+    blob2: 'bg-blue-200 dark:bg-sky-500/30',
     Icon: Snowflake,
     iconColor: 'text-white',
   },
@@ -77,12 +77,20 @@ export const WeatherVisual = ({
       {background ? (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
-            className={`absolute -top-4 -left-4 w-32 h-32 md:w-40 md:h-40 ${blob1} rounded-full filter blur-[50px] opacity-40 
-            ${animate ? 'animate-blob' : ''} `}
+            className={cn(
+              'absolute -top-4 -left-4 w-32 h-32 md:w-40 md:h-40 rounded-full filter blur-[50px]',
+              'opacity-60 dark:opacity-40',
+              blob1,
+              animate && 'animate-blob'
+            )}
           />
           <div
-            className={`absolute top-4 -right-4 w-32 h-32 md:w-40 md:h-40 ${blob2} rounded-full filter blur-[50px] opacity-40 
-            ${animate ? 'animate-blob animation-delay-2000' : ''}`}
+            className={cn(
+              'absolute top-4 -right-4 w-32 h-32 md:w-40 md:h-40 rounded-full filter blur-[50px]',
+              'opacity-60 dark:opacity-40',
+              blob2,
+              animate && 'animate-blob animation-delay-2000'
+            )}
           />
         </div>
       ) : null}

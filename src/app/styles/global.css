@@ -22,6 +22,7 @@
 @layer utilities {
   .bg-gradient-base {
     @apply bg-linear-to-b from-blue-400 via-sky-300 to-cyan-700;
+    @apply dark:from-slate-900 dark:via-slate-800 dark:to-cyan-950;
   }
   .no-scrollbar {
     @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
@@ -33,46 +34,43 @@
     animation-delay: 4s;
   }
 
-  .custom-scrollbar-light {
+  .custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
   }
-  .custom-scrollbar-light::-webkit-scrollbar {
+  :is(.dark .custom-scrollbar) {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
   }
-  .custom-scrollbar-light::-webkit-scrollbar-track {
+  .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
     background: rgba(0, 0, 0, 0.05);
   }
-  .custom-scrollbar-light::-webkit-scrollbar-thumb {
+  /* 다크 모드 트랙 투명 */
+  :is(.dark .custom-scrollbar)::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     border: 2px solid transparent;
     background-clip: content-box;
     transition: background-color 0.3s;
   }
-  .custom-scrollbar-light::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.6);
+
+  /* 다크 모드 썸(Thumb) */
+  :is(.dark .custom-scrollbar)::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
   }
 
-  .custom-scrollbar-dark {
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent; /* Firefox */
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.6);
   }
-  /* Chrome, Edge, Safari */
-  .custom-scrollbar-dark::-webkit-scrollbar {
-    width: 6px;
-  }
-  .custom-scrollbar-dark::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .custom-scrollbar-dark::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-  }
-  .custom-scrollbar-dark::-webkit-scrollbar-thumb:hover {
+  :is(.dark .custom-scrollbar)::-webkit-scrollbar-thumb:hover {
     background-color: rgba(255, 255, 255, 0.4);
   }
 }

@@ -25,7 +25,10 @@ export const CardLayout = ({
           'flex flex-col justify-between gap-5 w-full h-full rounded-[40px] border overflow-hidden',
           isSkeleton
             ? 'border-white/20 bg-white/5 backdrop-blur-sm'
-            : 'border-white/40 text-slate-700'
+            : cn(
+                'border-white/40 text-slate-700',
+                'dark:bg-slate-900/40 dark:border-white/10 dark:text-white dark:backdrop-blur-md'
+              )
         )}>
         {children}
       </div>
