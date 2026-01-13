@@ -5,7 +5,7 @@ import {
 } from '@/entities/weather/api/lib';
 import type { WeatherApiRto } from '@/entities/weather/api/rdo';
 import type { WeatherInfo } from '@/entities/weather/model/types';
-import { getWeatherApi } from '@/shared/api';
+import { getWeatherApi } from '@/shared';
 
 // 1. 과거 날씨 데이터 조회 (오늘 05시 ~ 현재 직전)
 export const fetchPastDayWeather = async ({
