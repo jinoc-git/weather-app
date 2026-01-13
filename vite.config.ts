@@ -18,9 +18,11 @@ export default defineConfig({
         'favicon-32x32.png',
       ],
       manifest: {
-        name: 'Weather App',
-        short_name: 'Weather',
+        name: '오늘의 날씨',
+        short_name: '오늘의 날씨',
         description: '실시간 날씨 정보를 제공하는 앱',
+        theme_color: '#0f172a',
+        background_color: '#0f172a',
         display: 'standalone',
         icons: [
           {
