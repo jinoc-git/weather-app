@@ -129,7 +129,14 @@ const Menu = ({
 
   return (
     <div
-      className={`absolute right-0 top-full mt-2 w-36 bg-[#2c2f38] border border-white/10 rounded-xl shadow-xl overflow-hidden z-30 animate-in fade-in slide-in-from-top-2 duration-200 ${className}`}>
+      className={cn(
+        'absolute right-0 top-full mt-2 w-36 overflow-hidden rounded-xl shadow-xl z-30',
+        'animate-in fade-in slide-in-from-top-2 duration-200',
+        'bg-white border border-slate-200',
+        'dark:bg-[#2c2f38] dark:border-white/10',
+
+        className
+      )}>
       {children}
     </div>
   );
@@ -150,11 +157,15 @@ const Item = ({ children, onClick, className = '' }: ItemProps) => {
     context?.close();
   };
 
-  const baseStyle =
-    'w-full flex items-center gap-2 px-4 py-3 text-sm transition text-left cursor-pointer';
-
   return (
-    <button onClick={handleClick} className={`${baseStyle} ${className}`}>
+    <button
+      onClick={handleClick}
+      className={cn(
+        'w-full flex items-center gap-2 px-4 py-3 text-sm transition text-left cursor-pointer',
+        'text-slate-900 hover:bg-slate-100',
+        'dark:text-white dark:hover:bg-white/10',
+        className
+      )}>
       {children}
     </button>
   );
