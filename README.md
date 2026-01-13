@@ -11,7 +11,7 @@
 ### 저장소 클론
 
 ```bash
-git clone [repository-url]
+git clone https://github.com/jinoc-git/weather-app
 ```
 
 ### 의존성 설치
