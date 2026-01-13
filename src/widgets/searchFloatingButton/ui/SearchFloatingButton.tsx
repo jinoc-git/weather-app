@@ -1,7 +1,13 @@
 import { useSearchModal } from '@/entities/search';
-import { SearchModal } from '@/features/search';
 import { Search } from 'lucide-react';
 import { motion } from 'motion/react';
+import { lazy, Suspense } from 'react';
+
+const SearchModal = lazy(() =>
+  import('@/features/search').then((module) => ({
+    default: module.SearchModal,
+  }))
+);
 
 export const SearchFloatingButton = () => {
   const { isOpen, close, open } = useSearchModal();
@@ -15,8 +21,11 @@ export const SearchFloatingButton = () => {
         className="fixed bottom-8 right-8 z-30 w-14 h-14 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center text-white shadow-xl cursor-pointer">
         <Search size={28} />
       </motion.button>
-
-      <SearchModal isOpen={isOpen} close={close} />
+      {isOpen ? (
+        <Suspense fallback={null}>
+          <SearchModal isOpen={isOpen} close={close} />
+        </Suspense>
+      ) : null}
     </>
   );
 };
