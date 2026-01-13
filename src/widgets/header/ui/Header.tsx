@@ -6,11 +6,15 @@ import {
   LocationBadge,
   LocationBadgeSkeleton,
 } from '@/shared';
-import { Sidebar } from '@/widgets/sidebar';
 import { Home } from 'lucide-react';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+
+const Sidebar = lazy(() =>
+  import('@/widgets/sidebar').then((module) => ({ default: module.Sidebar }))
+);
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -80,12 +84,16 @@ export const Header = () => {
         </div>
       </header>
 
-      <Sidebar
-        isOpen={sidebar.isOpen}
-        onClose={sidebar.close}
-        locationUI={renderLocationUI()}
-        onItemClick={handleSelectCity}
-      />
+      {sidebar.isOpen ? (
+        <Suspense fallback={null}>
+          <Sidebar
+            isOpen={sidebar.isOpen}
+            onClose={sidebar.close}
+            locationUI={renderLocationUI()}
+            onItemClick={handleSelectCity}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };
