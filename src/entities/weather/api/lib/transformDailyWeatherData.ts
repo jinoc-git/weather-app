@@ -20,7 +20,7 @@ export const transformDailyWeatherData = (
 
   // [Step 1] 데이터 순회 및 파싱
   items.forEach((item) => {
-    // 💡 헬퍼 함수를 통해 안전하게 숫자 변환
+    // 헬퍼 함수를 통해 안전하게 숫자 변환
     const val = parseWeatherValue(item.category, item.fcstValue);
 
     if (item.fcstDate === todayStr) {
@@ -73,17 +73,20 @@ export const transformDailyWeatherData = (
     (a, b) => (a.dt || 0) - (b.dt || 0)
   ) as HourlyWeather[];
 
-  // [Step 3] 표시 범위 필터링 (엣지 케이스 적용) 및 현재 시각 날씨 구하기
+  // [Step 3] 현재 시각 날씨 구하기
   const currentHour = now.getHours();
   const currentKey = parseInt(
     `${todayStr}${String(currentHour).padStart(2, '0')}00`
   );
 
   // 정렬된 리스트에서 현재 시간과 일치하는 데이터를 찾음
-  const currentItem = sortedItems.find((item) => item.dt === currentKey);
+  // 없으면 가장 가까운 미래 데이터를 사용하고 미래 데이터가 없으면 과거 마지막 데이터 사용
+  const currentItem =
+    sortedItems.find((item) => item.dt >= currentKey) ||
+    sortedItems[sortedItems.length - 1];
 
-  const nowTmp = currentItem?.tmp ?? Infinity;
-  // 👇 추가된 부분: 현재 날씨 상태(Sky), 강수 형태(Pty), 적설량(Sno) 추출
+  // 현재 날씨 상태(Sky), 강수 형태(Pty), 적설량(Sno) 추출
+  const nowTmp = currentItem?.tmp ?? Infinity; // 예외 처리를 위해 Infinity 사용
   const nowSky = currentItem?.sky ?? 1; // 기본값 맑음(1)
   const nowPty = currentItem?.pty ?? 0; // 기본값 없음(0)
   const nowSno = currentItem?.sno ?? 0; // 기본값 적설없음(0)
@@ -102,7 +105,7 @@ export const transformDailyWeatherData = (
     return item.dt >= startTimeLimit && item.dt <= endTimeLimit;
   });
 
-  // [Step 4] 안전장치 (Fallback Logic)
+  // [Step 4] 안전장치
   // API에서 아직 오늘의 TMN/TMX가 발표되지 않았거나 누락된 경우,
   // 가지고 있는 '오늘의 시간별 기온(TMP)' 중에서 최솟값/최댓값을 계산해서 채워넣습니다.
 
