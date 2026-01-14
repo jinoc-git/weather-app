@@ -1,7 +1,7 @@
 import { useBookmarkStore } from '@/entities/bookmark';
 import { useLocationStore } from '@/entities/location';
 import { useGetDaliyWeatherList } from '@/features/weather/model';
-import { Card, CardSkeleton } from '@/widgets/card';
+import { CardSkeleton, RenderCardFromHome } from '@/widgets/card';
 import { useEffect, useMemo } from 'react';
 import toast from 'react-hot-toast';
 
@@ -9,8 +9,8 @@ export const HomePage = () => {
   const bookmarks = useBookmarkStore((state) => state.bookmarks);
   const {
     myLocation,
-    isLoading: isLocLoading,
-    // error, // 에러 발생했을 때 처리 및 UI 필요
+    // isLoading: isLocLoading,
+    error,
   } = useLocationStore();
 
   const cityList = useMemo(() => {
@@ -32,25 +32,28 @@ export const HomePage = () => {
     }
   }, [hasWeatherError]);
 
+  const showLocationSkeleton = !myLocation && !error;
+  const showLocationCard = !!myLocation;
+
   return (
     <>
-      {!myLocation && isLocLoading && <CardSkeleton />}
+      {showLocationSkeleton && <CardSkeleton key="current-location-skeleton" />}
+      {showLocationCard && (
+        <RenderCardFromHome
+          queryResult={result[0]}
+          city={myLocation}
+          isCurrentLocation={true}
+        />
+      )}
 
-      {cityList.map((city, i) => {
-        const queryResult = result[i];
-
-        if (!queryResult || queryResult.isLoading || !queryResult.data) {
-          return <CardSkeleton key={`skeleton-${city.address || i}`} />;
-        }
-
-        const { data } = queryResult;
-        const displayData = { ...data, nickname: city.nickname };
-        const isCurrentLocation = myLocation?.address === data.address;
+      {bookmarks.map((city, i) => {
+        const dataIndex = myLocation ? i + 1 : i;
         return (
-          <Card
-            key={data.address}
-            data={displayData}
-            isCurrentLocation={isCurrentLocation}
+          <RenderCardFromHome
+            key={city.address}
+            queryResult={result[dataIndex]}
+            city={city}
+            isCurrentLocation={false}
           />
         );
       })}

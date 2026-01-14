@@ -29,7 +29,7 @@ export const fetchPastDayWeather = async ({
       },
     }
   );
-  console.log(response);
+
   return response?.items?.item || [];
 };
 
