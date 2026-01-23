@@ -2,7 +2,7 @@ import type { CityDto } from '@/entities/search';
 import { fetchDatilyWeather } from '@/features/weather/api';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetDailyWeather = (params: CityDto | null) => {
+export const useGetDailyWeather = (params: CityDto | null | undefined) => {
   const now = new Date();
 
   return useQuery({

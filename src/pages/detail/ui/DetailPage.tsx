@@ -1,5 +1,6 @@
-import { getCityDataById } from '@/entities/search';
+import { useCityData } from '@/features/search';
 import { useGetDailyWeather } from '@/features/weather/model/useGetDaliyWeather';
+import { DetailPageError } from '@/pages/detail/ui/DetailPageError';
 import { Card, CardSkeleton } from '@/widgets/card';
 import { useParams, useSearchParams } from 'react-router-dom';
 
@@ -8,13 +9,13 @@ export const DetailPage = () => {
   const [searchParams] = useSearchParams();
   const addrParam = searchParams.get('addr');
 
-  const cityData = getCityDataById(cityId, addrParam);
+  const { data: cityData } = useCityData(cityId, addrParam);
   const { data, isPending } = useGetDailyWeather(cityData);
 
-  if (!cityId || !addrParam) return <div>도시 정보가 없습니다</div>;
+  if (!cityId || !addrParam) return <DetailPageError type="잘못된 접근" />;
 
   if (isPending) return <CardSkeleton />;
-  if (!data) return <div>도시 정보가 없습니다</div>;
+  if (!data) return <DetailPageError type="데이터 없음" />;
 
   return <Card data={data} preventNavigation />;
 };

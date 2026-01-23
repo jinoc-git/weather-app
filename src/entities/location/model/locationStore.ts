@@ -24,12 +24,12 @@ export const useLocationStore = create<LocationState>((set) => ({
 
     // 현재 위치 요청
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const { latitude, longitude } = position.coords;
 
         // 위경도 -> 기상청 격자 변환
         const { x, y } = dfs_xy_conv(latitude, longitude);
-        const matchedCity = getCityDataByGrid(x, y);
+        const matchedCity = await getCityDataByGrid(x, y);
 
         if (matchedCity) {
           set({
@@ -63,7 +63,7 @@ export const useLocationStore = create<LocationState>((set) => ({
         });
       },
       // 정확도 높임, 타임아웃 5초
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
     );
   },
 }));
