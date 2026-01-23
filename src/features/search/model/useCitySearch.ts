@@ -1,24 +1,21 @@
-import {
-  getNomalizedCityList,
-  mapCityRdoToDto,
-  type CityDto,
-} from '@/entities/search';
+import { mapCityRdoToDto, type CityDto } from '@/entities/search';
 import { normalizeString } from '@/shared';
+import { useSearchBaseData } from './useSearchBaseData';
 import { useMemo } from 'react';
 
 export const useCitySearch = (keyword: string) => {
-  const { normalizedData: allKeys, rawData } = useMemo(() => {
-    return getNomalizedCityList();
-  }, []);
+  const { data: searchBaseData, isLoading } = useSearchBaseData();
 
   const results = useMemo(() => {
-    if (!keyword || keyword.trim().length === 0) return [];
+    if (!searchBaseData || !keyword || keyword.trim().length === 0) return [];
+
+    const { normalizedData, rawData } = searchBaseData;
 
     const normalizedQuery = normalizeString(keyword);
     const MAX_RESULTS = 50;
-
     const matchedKeys = [];
-    for (const item of allKeys) {
+
+    for (const item of normalizedData) {
       if (item.normalizedKey.includes(normalizedQuery)) {
         matchedKeys.push(item.originalKey);
       }
@@ -35,7 +32,7 @@ export const useCitySearch = (keyword: string) => {
     }
 
     return flattenedResults;
-  }, [keyword, allKeys, rawData]);
+  }, [searchBaseData, keyword]);
 
-  return { results };
+  return { results, isLoading };
 };

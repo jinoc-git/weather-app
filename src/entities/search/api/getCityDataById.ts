@@ -1,12 +1,14 @@
 import type { CityDto } from '../dto';
-import { cityIdMap } from '@/entities/search/model';
+import { getCityIdMap } from '@/entities/search/model';
 import { mapCityRdoToDto } from '@/entities/search/lib';
 
-export const getCityDataById = (
+export const getCityDataById = async (
   cityId: string | undefined,
-  addr: string | null
-): CityDto | null => {
+  addr: string | null,
+): Promise<CityDto | null> => {
   if (!cityId || !addr) return null;
+
+  const cityIdMap = await getCityIdMap();
 
   const data = cityIdMap[cityId];
   if (!data) return null;
